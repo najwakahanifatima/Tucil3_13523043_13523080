@@ -1,6 +1,9 @@
+import algorithms.UCSSolver;
+import java.util.*;
 import utils.Position;
 import utils.RushHourGame;
 import utils.SaveLoad;
+import utils.State;
 
 
 public class Main {
@@ -10,11 +13,17 @@ public class Main {
 
         // main program
         // testing
-        RushHourGame game = new RushHourGame(input );
-        game.displayBoard();
+        RushHourGame game = new RushHourGame(input);
+        // RushHourDebugger debug = new RushHourDebugger(game);
+        // debug.analyzeBoard();
+
+        UCSSolver solver = new UCSSolver(game);
+        List<State> result = solver.solve();
+        solver.displaySolution(result);
+
+        // game.displayBoard();
         Position p = new Position(game.getExitPosition().getRow(), game.getExitPosition().getCol());
         p.displayPosition();
-        system.saveMatrixToTxt(game.getBoard(), "hasil1");
-
+        // system.saveMatrixToTxt(game.getBoard(), "test/hasil1.txt");
     }
 }

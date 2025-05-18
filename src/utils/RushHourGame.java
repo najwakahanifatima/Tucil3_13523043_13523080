@@ -8,7 +8,7 @@ public class RushHourGame {
     private int cols;
     private int numVehicles;
     private char[][] board;
-    private Map<Character, Vehicle> vehicles;
+    public Map<Character, Vehicle> vehicles;
     private char targetVehicle;
     private Position exitPosition;
 
@@ -69,6 +69,9 @@ public class RushHourGame {
                 }
             }
         }
+
+        System.err.println("Board awal:" + rows + " x " + cols);
+        displayBoard();
     }
 
     private void identifyVehicles() {
@@ -127,5 +130,8 @@ public class RushHourGame {
         }
     }
 
+    public Map<Character, Vehicle> vehicles() {
+        return vehicles;
+    }
     
 }
