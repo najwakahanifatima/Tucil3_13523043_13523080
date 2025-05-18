@@ -1,5 +1,6 @@
+package utils;
 
-class Position {
+public class Position {
     public int row;
     public int col;
     
@@ -10,6 +11,13 @@ class Position {
 
     public void displayPosition() {
     System.out.println("Row: " + row + ", Col: " + col);
+    }
+
+    public int getRow(){
+        return row;
+    }
+    public int getCol(){
+        return col;
     }
 
 }

@@ -1,7 +1,7 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
+import utils.Position;
+import utils.RushHourGame;
+import utils.SaveLoad;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -10,10 +10,11 @@ public class Main {
 
         // main program
         // testing
-        RushHourGame game = new RushHourGame(input);
+        RushHourGame game = new RushHourGame(input );
         game.displayBoard();
-        game.getExitPosition().displayPosition();
-        
+        Position p = new Position(game.getExitPosition().getRow(), game.getExitPosition().getCol());
+        p.displayPosition();
+        system.saveMatrixToTxt(game.getBoard(), "hasil1");
 
     }
 }

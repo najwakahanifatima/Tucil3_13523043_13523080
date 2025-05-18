@@ -1,3 +1,5 @@
+package utils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,26 +21,54 @@ public class RushHourGame {
     private void parseInput(String input) {
         String[] lines = input.split("\n");
         String[] dimensions = lines[0].split(" ");
-        rows = Integer.parseInt(dimensions[0]);
-        cols = Integer.parseInt(dimensions[1]);
+        int specifiedRows = Integer.parseInt(dimensions[0]);
+        int specifiedCols = Integer.parseInt(dimensions[1]);
         numVehicles = Integer.parseInt(lines[1]);
         
-        board = new char[rows][cols];
-        for (int i = 0; i < rows; i++) {
-            String line = lines[i + 2];
-            for (int j = 0; j < Math.min(cols, line.length()); j++) {
-                board[i][j] = line.charAt(j);
-                if (board[i][j] == 'P') {
-                    targetVehicle = 'P';
-                }
-            }
-            
-            // cek posisi K, di posisi kanan
-            if (line.length() > cols && line.charAt(cols) == 'K') {
-                exitPosition = new Position(i, cols); 
+        // menentukan dimensi board sesuai dengan letak K
+        int actualRows = specifiedRows;
+        int actualCols = specifiedCols;
+        
+        // konfigurasi board
+        for (int i = 2; i < lines.length; i++) {
+            String line = lines[i];
+
+            if (line.length() > actualCols) {
+                actualCols = line.length();
             }
         }
         
+        // additional row
+        if (lines.length > specifiedRows + 2) {
+            actualRows = lines.length - 2; 
+        }
+        
+        // board dengan dimensi yang telah disesuaikan
+        rows = actualRows;
+        cols = actualCols;
+        board = new char[rows][cols];
+        
+        // inisialisasi
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                board[i][j] = ' ';
+            }
+        }
+        
+        // parsing input
+        for (int i = 0; i < rows && i + 2 < lines.length; i++) {
+            String line = lines[i + 2];
+            for (int j = 0; j < cols && j < line.length(); j++) {
+                char c = line.charAt(j);
+                board[i][j] = c;
+                
+                if (c == 'K') {
+                    exitPosition = new Position(i, j);
+                } else if (c == 'P') {
+                    targetVehicle = 'P';
+                }
+            }
+        }
     }
 
     private void identifyVehicles() {
@@ -82,6 +112,10 @@ public class RushHourGame {
     
     public char getTargetVehicle() {
         return targetVehicle;
+    }
+
+    public char[][] getBoard(){
+        return this.board;
     }
 
     public void displayBoard(){
