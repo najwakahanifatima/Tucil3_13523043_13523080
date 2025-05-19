@@ -196,7 +196,7 @@ public class Algorithm {
 
     private void debugUnexplored(PriorityQueue<State> unexplored) {
         for (State s : unexplored) {
-            System.out.println("move: " + s.move + " --- h(n): " + Heuristic.calculateHeuristicGreedy(s));
+            System.out.println("move: " + s.move + " --- h(n): " + Heuristic.calculateHeuristicGreedy(s, game, 1) + " --- f(n): " + (s.cost + Heuristic.calculateHeuristicGreedy(s, game, 1)));
         }
     }
 }

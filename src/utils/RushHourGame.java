@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,38 +41,43 @@ public class RushHourGame {
         this.exitPosition = new Position(other.exitPosition);
     }
 
-    private void parseInput(String input) {
-        String[] lines = input.split("\n");
-        String[] dimensions = lines[0].split(" ");
-        rows = Integer.parseInt(dimensions[0]);
-        cols = Integer.parseInt(dimensions[1]);
-        numVehicles = Integer.parseInt(lines[1]);
+private void parseInput(String input) {
+    String[] lines = input.split("\n");
+    String[] dimensions = lines[0].trim().split(" ");
+    rows = Integer.parseInt(dimensions[0]);
+    cols = Integer.parseInt(dimensions[1]);
+    numVehicles = Integer.parseInt(lines[1].trim());
+    
+    board = new char[rows][cols];
+    for (char[] row : board) {
+        Arrays.fill(row, ' ');
+    }
+
+    for (int i = 0; i < lines.length - 2; i++) { 
+        String line = lines[i + 2].trim();
+        int boardCol = 0;
         
-        // board dengan dimensi yang telah disesuaikan
-        board = new char[rows][cols];
-        
-        // inisialisasi
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                board[i][j] = ' ';
-            }
-        }
-        
-        // parsing input
-        for (int i = 0; i < rows && i + 2 < lines.length; i++) {
-            String line = lines[i + 2];
-            for (int j = 0; j < line.length(); j++) {
-                char c = line.charAt(j);
-                if ((c >= 'A' && c <= 'Z') || c == '.') {
-                    if (c == 'K') {
-                        exitPosition = new Position(i, j);
-                    } else {
-                        board[i][j] = c;
-                    }
+        for (int j = 0; j < line.length(); j++) {
+            char c = line.charAt(j);
+            if (c == ' ') continue;
+
+            if (c == 'K') {
+                // bawah
+                if (i == rows - 1) { 
+                    exitPosition = new Position(rows, boardCol); 
+                }
+                else if (j == 0) exitPosition = new Position(i, -1); // Kiri
+                else if (i == 0) exitPosition = new Position(-1, j); // Atas
+                else if (j == line.length() - 1) exitPosition = new Position(i, cols); // Kanan
+            } 
+            else if ((c >= 'A' && c <= 'Z') || c == '.') {
+                if (i < rows && boardCol < cols) {
+                    board[i][boardCol++] = c;
                 }
             }
         }
     }
+}
 
     private void identifyVehicles() {
     vehicles = new HashMap<>();
