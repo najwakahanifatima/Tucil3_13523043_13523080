@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 public class RushHourGame {
+    // Warna ANSI untuk terminal
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_YELLOW = "\u001B[43m";  // Background kuning
+    public static final String ANSI_RED = "\u001B[41m";      // Background merah
+
     private int rows;
     private int cols;
     private int numVehicles;
@@ -144,14 +149,26 @@ public class RushHourGame {
         return vehicles;
     }
 
-    public void displayBoard(){
-        for (int i = 0; i < rows; i++){
-            for (int j = 0; j < cols; j++){
-                System.out.print(board[i][j]);
+    public void displayBoard() {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                char cell = board[i][j];
+                if (cell == '.') {
+                    System.out.print(". ");
+                } else {
+                    // Cek apakah kendaraan ini baru bergerak atau 'P'
+                    if (cell == lastMovedVehicle) {
+                        System.out.print(ANSI_YELLOW + cell + ANSI_RESET + " ");  // Kuning
+                    } else if (cell == 'P') {
+                        System.out.print(ANSI_RED + cell + ANSI_RESET + " ");     // Merah
+                    } else {
+                        System.out.print(cell + " ");
+                    }
+                }
             }
-            System.out.print("\n");
+            System.out.println();
         }
-        System.out.println("\n");
+        System.out.println();
     }
 
     // heuristic
@@ -265,38 +282,33 @@ public class RushHourGame {
         }
     }
 
+    private char lastMovedVehicle = '\0';  // Menyimpan ID kendaraan terakhir yang bergerak
+
     public void moveVehicle(char vehicleId, int direction) {
         Vehicle vehicle = vehicles.get(vehicleId);
         int row = vehicle.getRow();
         int col = vehicle.getCol();
         int length = vehicle.getLength();
-        
-        // Clear current position on the board
+
+        // Clear current position
         if (vehicle.isHorizontal()) {
             for (int i = 0; i < length; i++) {
                 board[row][col + i] = '.';
             }
-
-            // Update vehicle's position
-            if (direction < 0) {
-                vehicle.setCol(col - 1);
-            } else {
-                vehicle.setCol(col + 1);
-            }
-        } else { // Vertical vehicle
+        } else {
             for (int i = 0; i < length; i++) {
                 board[row + i][col] = '.';
             }
-
-            // Update vehicle's position
-            if (direction < 0) {
-                vehicle.setRow(row - 1);
-            } else {
-                vehicle.setRow(row + 1);
-            }
         }
 
-        // Set new position on the board
+        // Update position
+        if (vehicle.isHorizontal()) {
+            vehicle.setCol(direction < 0 ? col - 1 : col + 1);
+        } else {
+            vehicle.setRow(direction < 0 ? row - 1 : row + 1);
+        }
+
+        // Set new position
         row = vehicle.getRow();
         col = vehicle.getCol();
         if (vehicle.isHorizontal()) {
@@ -309,17 +321,12 @@ public class RushHourGame {
             }
         }
 
-        // Synchronize targetVehicle if 'P' is moved
+        lastMovedVehicle = vehicleId;  // Simpan ID kendaraan yang baru bergerak
+
+        // Update targetVehicle jika 'P' bergerak
         if (vehicleId == 'P') {
-            targetVehicle = new Vehicle(vehicle); // Create a new instance to reflect updates
+            targetVehicle = new Vehicle(vehicle);
         }
-
-        // if (vehicleId == 'P') {
-        //     System.out.println("Updated P's position: (" + targetVehicle.getRow() + ", " + targetVehicle.getCol() + ")");
-        //     System.out.println("New board state:");
-        //     displayBoard();
-        // }
-
     }
 
 
