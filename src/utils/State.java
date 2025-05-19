@@ -20,7 +20,7 @@ public class State implements Comparable<State> {
         return Integer.compare(this.cost, other.cost);
     }
 
-    public String getHash() {
+    public String getStateString() {
         List<String> ids = new ArrayList<>();
         for (Vehicle v : vehicles.values()) {
             ids.add(v.getId() + ":" + v.getRow() + "," + v.getCol());
