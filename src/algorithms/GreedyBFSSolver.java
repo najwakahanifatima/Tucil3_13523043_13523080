@@ -27,7 +27,7 @@ public class GreedyBFSSolver extends Algorithm {
             if (explored.contains(stateString)) continue;
             explored.add(stateString);
 
-            if (isGoal(current)) {
+            if (isGoal(current, game)) {
                 return constructPath(current);
             }
 

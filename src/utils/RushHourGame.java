@@ -1,8 +1,6 @@
 package utils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class RushHourGame {
@@ -205,43 +203,17 @@ public class RushHourGame {
     }
 
     public boolean isSolved() {
-    Vehicle target = targetVehicle;
-    if (target.isHorizontal()) {
-        int headCol = target.getCol() + target.getLength() - 1;
+        Vehicle target = targetVehicle;
+        if (target.isHorizontal()) {
+            int headCol = target.getCol() + target.getLength() - 1;
 
-        return headCol + 1 == exitPosition.getCol() && target.getRow() == exitPosition.getRow();
-    } else {
-        int headRow = target.getRow() + target.getLength() - 1;
+            return headCol + 1 == exitPosition.getCol() && target.getRow() == exitPosition.getRow();
+        } else {
+            int headRow = target.getRow() + target.getLength() - 1;
 
-        return headRow + 1 == exitPosition.getRow() && target.getCol() == exitPosition.getCol();
+            return headRow + 1 == exitPosition.getRow() && target.getCol() == exitPosition.getCol();
+        }
     }
-}
-
-// public List<RushHourGame> generateNextStates() {
-//     List<RushHourGame> nextStates = new ArrayList<>();
-//     for (Vehicle vehicle : vehicles.values()) {
-//         //try moving up/left
-//         if (canMove(vehicle, -1)) {
-//             RushHourGame newState = new RushHourGame(this);
-//             newState.moveVehicle(vehicle.getId(), -1);
-//             newState.lastMove = new State(vehicles, 1, );
-            
-            
-//             nextStates.add(newState);
-//         }
-        
-//         // try moving right/down
-//         if (canMove(vehicle, 1)) {
-//             RushHourGame newState = new RushHourGame(this);
-//             newState.moveVehicle(vehicle.getId(), 1);
-//             newState.lastMove = new Move(vehicle.getId(), vehicle.isHorizontal() ? "RIGHT" : "DOWN", 1);
-        
-            
-//             nextStates.add(newState);
-//         }
-//     }
-//     return nextStates;
-// }
 
 
     boolean canMove(Vehicle vehicle, int direction) {

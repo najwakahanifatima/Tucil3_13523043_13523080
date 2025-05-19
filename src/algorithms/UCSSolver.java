@@ -29,7 +29,7 @@ public class UCSSolver extends Algorithm {
             explored.add(stateString);
 
             // klo udah sampai goal, buat path
-            if (isGoal(current)) {
+            if (isGoal(current, game)) {
                 return constructPath(current);
             }
 

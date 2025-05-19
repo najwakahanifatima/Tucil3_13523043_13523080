@@ -18,16 +18,18 @@ public class Algorithm {
         this.game = game;
     }
     
-    protected boolean isGoal(State state) {
-        Vehicle target = state.vehicles.get('P'); // cek target
-        Position exit = game.getExitPosition(); // cek exit position
+    protected boolean isGoal(State state, RushHourGame game) {
+        Vehicle target = state.getVehicle().get('P');
+        Position exitPosition = game.getExitPosition();
 
         if (target.isHorizontal()) {
-            return target.getRow() == exit.getRow() && 
-            (target.getCol() + target.getLength() - 1 == exit.getCol() || canExitHorizontal(target, exit, state.vehicles));
+            int headCol = target.getCol() + target.getLength() - 1;
+
+            return headCol + 1 == exitPosition.getCol() && target.getRow() == exitPosition.getRow();
         } else {
-            return target.getCol() == exit.getCol() &&
-            (target.getRow() + target.getLength() - 1 == exit.getRow() || canExitVertical(target, exit, state.vehicles));
+            int headRow = target.getRow() + target.getLength() - 1;
+
+            return headRow + 1 == exitPosition.getRow() && target.getCol() == exitPosition.getCol();
         }
     }
 

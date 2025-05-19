@@ -6,48 +6,71 @@ import utils.State;
 import utils.Vehicle;
 
 public class Heuristic {
-    private static int blockingHeuristic(State State, RushHourGame game) {
-        Vehicle target = State.getVehicle().get('P');
-        Position exit = game.getExitPosition();
-
-        int blockingCount = 0;
-        int distanceToExit = exit.getCol() - (target.getCol() + target.getLength() - 1);
-
-        for (Vehicle v : State.vehicles.values()) {
-            if (v.getId() == target.getId()) continue;
     
-            if (v.isHorizontal()) {
-                if (v.getRow() == target.getRow() && 
-                    v.getCol() > target.getCol() + target.getLength() - 1 &&
-                    v.getCol() <= exit.getCol()) {
+    public static int calculateHeuristicAstar(State state, RushHourGame game) {
+        Vehicle playerVehicle = state.getVehicle().get('P');
+        Position exitPosition = game.getExitPosition();
+        
+        // distance calculation
+        int playerEndCol = playerVehicle.getCol() + playerVehicle.getLength() - 1;
+        int distanceToExit = Math.max(0, exitPosition.getCol() - playerEndCol);
+        
+        // count blocking vehicles
+        int blockingCount = 0;
+        int playerRow = playerVehicle.getRow();
+        
+        for (Vehicle vehicle : state.getVehicle().values()) {
+            if (vehicle.getId() == 'P') continue;
+            
+            if (vehicle.isHorizontal()) {
+                if (vehicle.getRow() == playerRow && 
+                    vehicle.getCol() > playerEndCol) {
                     blockingCount++;
                 }
             } else {
-                if (v.getCol() > target.getCol() + target.getLength() - 1 &&
-                    v.getCol() <= exit.getCol() &&
-                    target.getRow() >= v.getRow() && 
-                    target.getRow() < v.getRow() + v.getLength()) {
+                int vehicleStartRow = vehicle.getRow();
+                int vehicleEndRow = vehicleStartRow + vehicle.getLength() - 1;
+                
+                if (vehicle.getCol() > playerEndCol &&
+                    vehicleStartRow <= playerRow && vehicleEndRow >= playerRow) {
                     blockingCount++;
                 }
             }
         }
+        
         return blockingCount + distanceToExit;
     }
 
-    public static int calculateHeuristicAstar(State state, RushHourGame game) {
-        return blockingHeuristic(state, game) + distanceToExit(state, game);
-    }
-
-    private static int distanceToExit(State state, RushHourGame game) {
-        Vehicle target = state.getVehicle().get('P');
-        Position exitPosition = game.getExitPosition();
-        if (target.isHorizontal()) {
-            int endCol = target.getCol() + target.getLength() - 1;
-            return exitPosition.getCol() - endCol;
-        } else {
-            int endRow = target.getRow() + target.getLength() - 1;
-            return exitPosition.getRow() - endRow;
+    // belum berhasil
+    public static int calculateHeuristicGreedy(State state, RushHourGame game) {
+        Vehicle playerVehicle = state.getVehicle().get('P');
+        int playerEndCol = playerVehicle.getCol() + playerVehicle.getLength() - 1;
+        
+        // count blocking vehicles
+        int blockingCount = 0;
+        int playerRow = playerVehicle.getRow();
+        
+        for (Vehicle vehicle : state.getVehicle().values()) {
+            if (vehicle.getId() == 'P') continue;
+            
+            if (vehicle.isHorizontal()) {
+                // horizontal
+                if (vehicle.getRow() == playerRow && 
+                    vehicle.getCol() > playerEndCol) {
+                    blockingCount++;
+                }
+            } else {
+                // vertical
+                int vehicleStartRow = vehicle.getRow();
+                int vehicleEndRow = vehicleStartRow + vehicle.getLength() - 1;
+                
+                if (vehicle.getCol() > playerEndCol &&
+                    vehicleStartRow <= playerRow && vehicleEndRow >= playerRow) {
+                    blockingCount++;
+                }
+            }
         }
+        
+        return blockingCount;
     }
-    
 }

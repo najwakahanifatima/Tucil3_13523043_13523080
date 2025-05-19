@@ -1,5 +1,7 @@
 
+import algorithms.AStarSolver;
 import algorithms.GreedyBFSSolver;
+import algorithms.UCSSolver;
 import java.util.List;
 import utils.RushHourGame;
 import utils.SaveLoad;
@@ -11,7 +13,7 @@ public class Main {
         String input = system.Load();
         RushHourGame game = new RushHourGame(input);
 
-        GreedyBFSSolver solver = new GreedyBFSSolver(game);
+        AStarSolver solver = new AStarSolver(game);
         List<State> result = solver.solve();
         solver.displaySolution(result);
         
