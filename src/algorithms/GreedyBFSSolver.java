@@ -22,10 +22,10 @@ public class GreedyBFSSolver extends Algorithm {
 
         while (!unexplored.isEmpty()) {
             State current = unexplored.poll();
-            String hash = current.getStateString();
+            String stateString = current.getStateString();
 
-            if (explored.contains(hash)) continue;
-            explored.add(hash);
+            if (explored.contains(stateString)) continue;
+            explored.add(stateString);
 
             if (isGoal(current)) {
                 return constructPath(current);
@@ -43,10 +43,6 @@ public class GreedyBFSSolver extends Algorithm {
     private int calculateHeuristic(State State) {
         Vehicle target = State.vehicles.get(game.getTargetVehicle());
         Position exit = game.getExitPosition();
-
-        if (target.getRow() != exit.getRow()) {
-            return 1000;
-        }
 
         int blockingCount = 0;
         int distanceToExit = exit.getCol() - (target.getCol() + target.getLength() - 1);
