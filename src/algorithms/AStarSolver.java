@@ -14,9 +14,11 @@ public class AStarSolver extends Algorithm {
         Map<String, Integer> gScores = new HashMap<>();
         
         // priority queue with f(n) = g(n) + h(n) ordering
+        
+        // sesuain nanti opsinya
         PriorityQueue<State> openSet = new PriorityQueue<>((s1, s2) -> {
-            int f1 = s1.getCost() + Heuristic.calculateHeuristicAstar(s1, game);
-            int f2 = s2.getCost() + Heuristic.calculateHeuristicAstar(s2, game);
+            int f1 = s1.getCost() + Heuristic.calculateHeuristicAstar(s1, game, 2);
+            int f2 = s2.getCost() + Heuristic.calculateHeuristicAstar(s2, game, 2);
             return Integer.compare(f1, f2);
         });
         

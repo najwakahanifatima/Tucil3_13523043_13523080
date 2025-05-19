@@ -7,42 +7,24 @@ import utils.Vehicle;
 
 public class Heuristic {
     
-    public static int calculateHeuristicAstar(State state, RushHourGame game) {
+    // belum berhasil
+
+    public static int manhattanDistance(State state, RushHourGame game) {
         Vehicle playerVehicle = state.getVehicle().get('P');
         Position exitPosition = game.getExitPosition();
         
-        // distance calculation
+        int playerEndRow = playerVehicle.getRow();
         int playerEndCol = playerVehicle.getCol() + playerVehicle.getLength() - 1;
-        int distanceToExit = Math.max(0, exitPosition.getCol() - playerEndCol);
+    
+        int horizontalDistance = Math.abs(exitPosition.getCol() - playerEndCol);
+        int verticalDistance = Math.abs(exitPosition.getRow() - playerEndRow);
         
-        // count blocking vehicles
-        int blockingCount = 0;
-        int playerRow = playerVehicle.getRow();
+        int manhattanDistance = horizontalDistance + verticalDistance;
         
-        for (Vehicle vehicle : state.getVehicle().values()) {
-            if (vehicle.getId() == 'P') continue;
-            
-            if (vehicle.isHorizontal()) {
-                if (vehicle.getRow() == playerRow && 
-                    vehicle.getCol() > playerEndCol) {
-                    blockingCount++;
-                }
-            } else {
-                int vehicleStartRow = vehicle.getRow();
-                int vehicleEndRow = vehicleStartRow + vehicle.getLength() - 1;
-                
-                if (vehicle.getCol() > playerEndCol &&
-                    vehicleStartRow <= playerRow && vehicleEndRow >= playerRow) {
-                    blockingCount++;
-                }
-            }
-        }
-        
-        return blockingCount + distanceToExit;
+        return manhattanDistance;
     }
 
-    // belum berhasil
-    public static int calculateHeuristicGreedy(State state, RushHourGame game) {
+    public static int blockingCount(State state, RushHourGame game) {
         Vehicle playerVehicle = state.getVehicle().get('P');
         int playerEndCol = playerVehicle.getCol() + playerVehicle.getLength() - 1;
         
@@ -73,4 +55,28 @@ public class Heuristic {
         
         return blockingCount;
     }
+    
+    public static int calculateHeuristicGreedy(State state, RushHourGame game, int opsi) {
+        if (opsi == 1) {
+            return blockingCount(state, game);
+        } else {
+            return manhattanDistance(state, game);
+        }
+    }
+    
+    public static int calculateHeuristicAstar(State state, RushHourGame game, int opsi) {
+        Vehicle playerVehicle = state.getVehicle().get('P');
+        Position exitPosition = game.getExitPosition();
+        
+        // distance calculation
+        int playerEndCol = playerVehicle.getCol() + playerVehicle.getLength() - 1;
+        int distanceToExit = Math.max(0, exitPosition.getCol() - playerEndCol);
+        
+        if (opsi == 1) {
+            return distanceToExit + blockingCount(state, game);
+        } else {
+            return distanceToExit + manhattanDistance(state, game);
+        }
+    }
+
 }
