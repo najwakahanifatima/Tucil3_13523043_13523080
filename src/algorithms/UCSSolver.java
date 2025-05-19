@@ -1,10 +1,7 @@
 package algorithms;
 
 import java.util.*;
-import utils.RushHourGame;
-import utils.Vehicle;
-import utils.Position;
-import utils.State;
+import utils.*;
 
 public class UCSSolver {
     private RushHourGame game;
@@ -14,65 +11,86 @@ public class UCSSolver {
     }
 
     public List<State> solve() {
-        // pakai priority queue dengan prio cost terendah untuk main logic nya
-        PriorityQueue<State> frontier = new PriorityQueue<>(Comparator.comparingInt(n -> n.cost));
-        // explored
+        // cek priority queue dengan cost terendah
+        PriorityQueue<State> unexplored = new PriorityQueue<>(Comparator.comparingInt(n -> n.cost));
+        // explored state
         Set<String> explored = new HashSet<>();
 
-        // buat initial state
+        // initial state
         State start = new State(cloneVehicleMap(game.vehicles), 0, null, "");
-        frontier.add(start);
+        unexplored.add(start);
 
-        while (!frontier.isEmpty()) {
-            State current = frontier.poll(); // ambil initial state
-            String hash = current.getHash(); // ambil string dari state vehicles
+        // iterate sampai ketemu goals atau semua kemungkinan state sudah habis dicek
+        while (!unexplored.isEmpty()) {
+            State current = unexplored.poll();
+            String stateString = current.getStateString();
 
-            // klo state ini sudah dieksplor, skip
-            if (explored.contains(hash)) continue;
-            explored.add(hash); // klo belum, add ke hash
+            // klo state sudah dieksplor, skip
+            if (explored.contains(stateString)) continue;
+            explored.add(stateString);
 
-            // klo sudah sampai goal, construct path
+            // klo udah sampai goal, buat path
             if (isGoal(current)) {
-                return reconstructPath(current);
+                return constructPath(current);
             }
 
-            // menambahkan all neighbours state dari current
-            frontier.addAll(generateNeighbors(current));
+            // klo blm sampai goal, eksplor all neighbour state
+            unexplored.addAll(getNeighbours(current));
         }
 
         return null;
     }
 
-    private boolean isGoal(State State) {
-        Vehicle target = State.vehicles.get('P'); // cek target
+    private boolean isGoal(State state) {
+        Vehicle target = state.vehicles.get('P'); // cek target
         Position exit = game.getExitPosition(); // cek exit position
 
         if (target.isHorizontal()) {
             return target.getRow() == exit.getRow() && 
-                   (target.getCol() + target.getLength() - 1 == exit.getCol() || 
-                    canReachExit(target, exit, State.vehicles));
+            (target.getCol() + target.getLength() - 1 == exit.getCol() || canExitHorizontal(target, exit, state.vehicles));
         } else {
-            return target.getCol() == exit.getCol() && 
-                   target.getRow() + target.getLength() - 1 == exit.getRow();
+            return target.getCol() == exit.getCol() &&
+            (target.getRow() + target.getLength() - 1 == exit.getRow() || canExitVertical(target, exit, state.vehicles));
         }
     }
-    
-    private boolean canReachExit(Vehicle target, Position exit, Map<Character, Vehicle> vehicles) {
+
+    private boolean canExitHorizontal(Vehicle target, Position exit, Map<Character, Vehicle> vehicles) {
         int row = target.getRow();
-        int targetRightEdge = target.getCol() + target.getLength();
-        
-        for (int col = targetRightEdge; col <= exit.getCol(); col++) {
-            // cek apakah ada vehicle yg menghalangi
+        int edge = target.getCol() + target.getLength();
+
+        for (int col = edge; col <= exit.getCol(); col++) {
+            //cek apakah ada vehicle yang menghalangi
             for (Vehicle v : vehicles.values()) {
                 if (v.getId() == target.getId()) continue; // skip klo target
-                
                 if (v.isHorizontal()) {
                     if (v.getRow() == row && col >= v.getCol() && col < v.getCol() + v.getLength()) {
                         return false;
                     }
                 } else {
                     if (col == v.getCol() && row >= v.getRow() && row < v.getRow() + v.getLength()) {
-                        return false;     
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean canExitVertical(Vehicle target, Position exit, Map<Character, Vehicle> vehicles) {
+        int col = target.getCol();
+        int targetBottomEdge = target.getRow() + target.getLength();
+        
+        for (int row = targetBottomEdge; row <= exit.getRow(); row++) {
+            for (Vehicle v : vehicles.values()) {
+                if (v.getId() == target.getId()) continue;
+                
+                if (v.isHorizontal()) {
+                    if (row == v.getRow() && col >= v.getCol() && col < v.getCol() + v.getLength()) {
+                        return false;
+                    }
+                } else {
+                    if (col == v.getCol() && row >= v.getRow() && row < v.getRow() + v.getLength()) {
+                        return false;
                     }
                 }
             }
@@ -81,27 +99,26 @@ public class UCSSolver {
         return true;
     }
 
-    private List<State> generateNeighbors(State State) {
-        List<State> neighbors = new ArrayList<>();
-        char[][] board = buildBoardFromVehicles(State.vehicles);
+    private List<State> getNeighbours(State state) {
+        List<State> neighbours = new ArrayList<>();
+        char[][] board = buildBoardFromVehicles(state.vehicles);
 
-        for (Vehicle v : State.vehicles.values()) {
-            for (int direction : new int[]{-1, 1}) {
+        for (Vehicle v : state.vehicles.values()) {
+            for (int direction : new int[]{-1,1}) {
                 if (v.canMove(direction, board)) {
-                    Map<Character, Vehicle> newVehicles = cloneVehicleMap(State.vehicles);
+                    Map<Character, Vehicle> newVehicles = cloneVehicleMap(state.vehicles);
                     Vehicle movedVehicle = newVehicles.get(v.getId());
                     movedVehicle.move(direction);
 
                     String dirString = getDirectionString(v, direction);
                     String moveDesc = v.getId() + " moves " + dirString;
-
-                    State newState = new State(newVehicles, State.cost + 1, State, moveDesc);
-                    neighbors.add(newState);
+                    
+                    State newState = new State(newVehicles, state.cost+1, state, moveDesc);
+                    neighbours.add(newState);
                 }
             }
         }
-
-        return neighbors;
+        return neighbours;
     }
 
     private String getDirectionString(Vehicle v, int direction) {
@@ -129,7 +146,7 @@ public class UCSSolver {
             Arrays.fill(board[i], '.');
         }
 
-         for (Vehicle v : vehicles.values()) {
+            for (Vehicle v : vehicles.values()) {
             for (int i = 0; i < v.getLength(); i++) {
                 int r = v.getRow() + (v.isHorizontal() ? 0 : i);
                 int c = v.getCol() + (v.isHorizontal() ? i : 0);
@@ -145,7 +162,7 @@ public class UCSSolver {
         return board;
     }
 
-    private List<State> reconstructPath(State goal) {
+    private List<State> constructPath(State goal) {
         List<State> path = new ArrayList<>();
         while (goal != null) {
             path.add(goal);
@@ -157,15 +174,15 @@ public class UCSSolver {
 
     public void displaySolution(List<State> path) {
         int step = 0;
-        for (State State : path) {
+        for (State state : path) {
             System.out.println("Step " + step++);
-            if (State.move != null && !State.move.isEmpty()) {
-                System.out.println("Move: " + State.move);
+            if (state.move != null && !state.move.isEmpty()) {
+                System.out.println("Move: " + state.move);
             } else {
                 System.out.println("Initial state");
             }
 
-            printBoard(State.vehicles);
+            printBoard(state.vehicles);
             System.out.println("------------------------");
         }
     }
