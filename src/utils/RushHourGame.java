@@ -13,14 +13,14 @@ public class RushHourGame {
     private Map<Character, Vehicle> vehicles;
     private Vehicle targetVehicle;
     private Position exitPosition;
-    private String lastMove; // Track the last move made
+    private Move lastMove; // Track the last move made
 
 
     
     public RushHourGame(String input) {
         parseInput(input);
         identifyVehicles();
-        this.lastMove = "Initial";
+        this.lastMove = new Move('I', "N/A", 0);
     }
 
     public RushHourGame(RushHourGame other) {
@@ -215,7 +215,7 @@ public class RushHourGame {
         if (canMove(vehicle, -1)) {
             RushHourGame newState = new RushHourGame(this);
             newState.moveVehicle(vehicle.getId(), -1);
-            newState.lastMove = vehicle.getId() + (vehicle.isHorizontal() ? "-LEFT" : "-UP");
+            newState.lastMove = new Move(vehicle.getId(), vehicle.isHorizontal() ? "LEFT" : "UP", 1);
             
             // // Debug
             // if (vehicle.getId() == 'P') {
@@ -230,7 +230,7 @@ public class RushHourGame {
         if (canMove(vehicle, 1)) {
             RushHourGame newState = new RushHourGame(this);
             newState.moveVehicle(vehicle.getId(), 1);
-            newState.lastMove = vehicle.getId() + (vehicle.isHorizontal() ? "-RIGHT" : "-DOWN");
+            newState.lastMove = new Move(vehicle.getId(), vehicle.isHorizontal() ? "RIGHT" : "DOWN", 1);
             
             // // Debug
             // if (vehicle.getId() == 'P') {
@@ -265,7 +265,7 @@ public class RushHourGame {
         }
     }
 
-    void moveVehicle(char vehicleId, int direction) {
+    public void moveVehicle(char vehicleId, int direction) {
         Vehicle vehicle = vehicles.get(vehicleId);
         int row = vehicle.getRow();
         int col = vehicle.getCol();
@@ -339,7 +339,7 @@ public class RushHourGame {
         }
     }
 
-    public String getLastMove() {
+    public Move getLastMove() {
         return lastMove;
     }
 

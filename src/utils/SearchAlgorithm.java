@@ -13,7 +13,7 @@ abstract class SearchAlgorithm {
     protected int maxQueueSize = 0;
     
    
-    public abstract List<String> solve(RushHourGame initialState);
+    public abstract List<Move> solve(RushHourGame initialState);
     
     
     protected List<RushHourGame> generateNextStates(RushHourGame state) {

@@ -16,7 +16,7 @@ public class RushHourSolver {
      * @param algorithm The algorithm to use (e.g., "astar", "bfs", "dfs")
      * @return List of moves that lead to the solution, or null if no solution found
      */
-    public static List<String> solve(RushHourGame initialState, String algorithm) {
+    public static List<Move> solve(RushHourGame initialState, String algorithm) {
         SearchAlgorithm searchAlgorithm;
         
         switch (algorithm.toLowerCase()) {
@@ -33,14 +33,21 @@ public class RushHourSolver {
             default:
                 throw new IllegalArgumentException("Unsupported algorithm: " + algorithm);
         }
-        
-        return searchAlgorithm.solve(initialState);
+
+        List<?> result = searchAlgorithm.solve(initialState);
+        List<Move> moves = new ArrayList<>();
+        if (result != null) {
+            for (Object obj : result) {
+                moves.add((Move) obj);
+            }
+        }
+        return moves;
     }
     
     /**
      * Convenience method to solve using A* algorithm
      */
-    public static List<String> solveWithAStar(RushHourGame initialState) {
+    public static List<Move> solveWithAStar(RushHourGame initialState) {
         return solve(initialState, "astar");
     }
     
@@ -53,7 +60,7 @@ public class RushHourSolver {
      */
     public static Map<String, Object> solveWithMetrics(RushHourGame initialState, String algorithm) {
         long startTime = System.currentTimeMillis();
-        List<String> solution = solve(initialState, algorithm);
+        List<Move> solution = solve(initialState, algorithm);
         long endTime = System.currentTimeMillis();
         
         Map<String, Object> metrics = new HashMap<>();

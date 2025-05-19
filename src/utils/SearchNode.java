@@ -10,9 +10,9 @@ class SearchNode implements Comparable<SearchNode> {
     private final int gScore;     // g(n): cost from start to this node
     private final int hScore;     // h(n): heuristic estimate from this node to the goal
     private final int fScore;     // f(n): g(n) + h(n)
-    private final List<String> path;
+    private final List<Move> path;
 
-    public SearchNode(RushHourGame state, int gScore, int hScore, List<String> path) {
+    public SearchNode(RushHourGame state, int gScore, int hScore, List<Move> path) {
         this.state = new RushHourGame(state);  // Deep copy
         this.gScore = gScore;
         this.hScore = hScore;
@@ -36,7 +36,7 @@ class SearchNode implements Comparable<SearchNode> {
         return fScore;
     }
 
-    public List<String> getPath() {
+    public List<Move> getPath() {
         return path;
     }
 

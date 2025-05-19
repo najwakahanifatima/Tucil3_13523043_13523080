@@ -13,10 +13,11 @@ import java.util.Set;
  * - g(n) is the cost so far to reach node n
  * - h(n) is the estimated cost from n to the goal
  */
-class AStarAlgorithm extends SearchAlgorithm {
+
+public class AStarAlgorithm extends SearchAlgorithm {
     
     @Override
-    public List<String> solve(RushHourGame initialState) {
+    public List<Move> solve(RushHourGame initialState) {
         
         // Priority queue for A* algorithm (sorted by f(n) = g(n) + h(n))
         PriorityQueue<SearchNode> openSet = new PriorityQueue<>();
@@ -84,7 +85,7 @@ class AStarAlgorithm extends SearchAlgorithm {
                     gScores.put(nextStateKey, tentativeGScore);
                     
                     // Create the new path
-                    List<String> newPath = new ArrayList<>(currentNode.getPath());
+                    List<Move> newPath = new ArrayList<>(currentNode.getPath());
 
                     newPath.add(nextState.getLastMove());
                     
