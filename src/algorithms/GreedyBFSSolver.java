@@ -1,10 +1,8 @@
 package algorithms;
 
 import java.util.*;
-import utils.Position;
 import utils.RushHourGame;
 import utils.State;
-import utils.Vehicle;
 
 public class GreedyBFSSolver extends Algorithm {
 
@@ -14,7 +12,7 @@ public class GreedyBFSSolver extends Algorithm {
 
     public List<State> solve() {
 
-        PriorityQueue<State> unexplored = new PriorityQueue<>(Comparator.comparingInt(this::calculateHeuristic));
+        PriorityQueue<State> unexplored = new PriorityQueue<>(Comparator.comparingInt(Heuristic::calculateHeuristicGreedy));
         Set<String> explored = new HashSet<>();
 
         State start = new State(cloneVehicleMap(game.getVehicles()), 0, null, "");
@@ -32,39 +30,12 @@ public class GreedyBFSSolver extends Algorithm {
             }
 
             List<State> neighbours = getNeighbours(current);
-            neighbours.sort(Comparator.comparingInt(this::calculateHeuristic));
+            neighbours.sort(Comparator.comparingInt(Heuristic::calculateHeuristicGreedy));
             unexplored.addAll(neighbours);
+
+            // debugUnexplored(unexplored);
         }
 
         return null;
-    }
-
-    // nanti ubah aja sesuai heuristik
-    private int calculateHeuristic(State State) {
-        Vehicle target = State.getVehicle().get('P');
-        Position exit = game.getExitPosition();
-
-        int blockingCount = 0;
-        int distanceToExit = exit.getCol() - (target.getCol() + target.getLength() - 1);
-
-        for (Vehicle v : State.vehicles.values()) {
-            if (v.getId() == target.getId()) continue;
-    
-            if (v.isHorizontal()) {
-                if (v.getRow() == target.getRow() && 
-                    v.getCol() > target.getCol() + target.getLength() - 1 &&
-                    v.getCol() <= exit.getCol()) {
-                    blockingCount++;
-                }
-            } else {
-                if (v.getCol() > target.getCol() + target.getLength() - 1 &&
-                    v.getCol() <= exit.getCol() &&
-                    target.getRow() >= v.getRow() && 
-                    target.getRow() < v.getRow() + v.getLength()) {
-                    blockingCount++;
-                }
-            }
-        }
-        return blockingCount + distanceToExit;
     }
 }
