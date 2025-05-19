@@ -1,4 +1,5 @@
-import algorithms.UCSSolver;
+
+import algorithms.*;
 import java.util.*;
 import utils.Position;
 import utils.RushHourGame;
@@ -16,6 +17,10 @@ public class Main {
         RushHourGame game = new RushHourGame(input);
         // RushHourDebugger debug = new RushHourDebugger(game);
         // debug.analyzeBoard();
+
+        // GreedyBFSSolver solver = new GreedyBFSSolver(game);
+        // List<State> result = solver.solve();
+        // solver.displaySolution(result);
 
         UCSSolver solver = new UCSSolver(game);
         List<State> result = solver.solve();
