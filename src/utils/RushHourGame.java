@@ -43,31 +43,11 @@ public class RushHourGame {
     private void parseInput(String input) {
         String[] lines = input.split("\n");
         String[] dimensions = lines[0].split(" ");
-        int specifiedRows = Integer.parseInt(dimensions[0]);
-        int specifiedCols = Integer.parseInt(dimensions[1]);
+        rows = Integer.parseInt(dimensions[0]);
+        cols = Integer.parseInt(dimensions[1]);
         numVehicles = Integer.parseInt(lines[1]);
         
-        // menentukan dimensi board sesuai dengan letak K
-        int actualRows = specifiedRows;
-        int actualCols = specifiedCols;
-        
-        // konfigurasi board
-        for (int i = 2; i < lines.length; i++) {
-            String line = lines[i];
-
-            if (line.length() > actualCols) {
-                actualCols = line.length();
-            }
-        }
-        
-        // additional row
-        if (lines.length > specifiedRows + 2) {
-            actualRows = lines.length - 2; 
-        }
-        
         // board dengan dimensi yang telah disesuaikan
-        rows = actualRows;
-        cols = actualCols;
         board = new char[rows][cols];
         
         // inisialisasi
@@ -80,13 +60,15 @@ public class RushHourGame {
         // parsing input
         for (int i = 0; i < rows && i + 2 < lines.length; i++) {
             String line = lines[i + 2];
-            for (int j = 0; j < cols && j < line.length(); j++) {
+            for (int j = 0; j < line.length(); j++) {
                 char c = line.charAt(j);
-                board[i][j] = c;
-                
-                if (c == 'K') {
-                    exitPosition = new Position(i, j);
-                } 
+                if ((c >= 'A' && c <= 'Z') || c == '.') {
+                    if (c == 'K') {
+                        exitPosition = new Position(i, j);
+                    } else {
+                        board[i][j] = c;
+                    }
+                }
             }
         }
     }
