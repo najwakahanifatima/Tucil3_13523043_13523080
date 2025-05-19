@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 public class RushHourGame {
-    // Warna ANSI untuk terminal
+    // warna ANSI untuk terminal
     public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_YELLOW = "\u001B[43m";  // Background kuning
-    public static final String ANSI_RED = "\u001B[41m";      // Background merah
+    public static final String ANSI_YELLOW = "\u001B[43m";  // kuning
+    public static final String ANSI_RED = "\u001B[41m";      // merah
 
     private int rows;
     private int cols;
@@ -18,7 +18,7 @@ public class RushHourGame {
     private Map<Character, Vehicle> vehicles;
     private Vehicle targetVehicle;
     private Position exitPosition;
-    private Move lastMove; // Track the last move made
+    private Move lastMove; 
 
 
     
@@ -103,10 +103,10 @@ public class RushHourGame {
         for (int j = 0; j < cols; j++) {
             char current = board[i][j];
             if (current != '.' && current != 'K' && !vehicles.containsKey(current)) {
-                // Identify direction of the vehicle (horizontal or vertical)
+                // identify direction (horizontal or vertical)
                 boolean isHorizontal = (j + 1 < cols && board[i][j + 1] == current);
 
-                // Find length and starting position of the vehicle
+                // starting position of the vehicle
                 int length = 1;
                 int startRow = i;
                 int startCol = j;
@@ -117,7 +117,8 @@ public class RushHourGame {
                         length++;
                         col++;
                     }
-                } else { // Vertical
+                } else { 
+                    // vertical
                     int row = i + 1;
                     while (row < rows && board[row][j] == current) {
                         length++;
@@ -127,7 +128,7 @@ public class RushHourGame {
 
                 Vehicle vehicle = new Vehicle(current, startRow, startCol, length, isHorizontal);
                 if (current == 'P') {
-                    targetVehicle = vehicle; // Update targetVehicle reference
+                    targetVehicle = vehicle;
                 }
 
                 vehicles.put(current, vehicle);
@@ -156,11 +157,11 @@ public class RushHourGame {
                 if (cell == '.') {
                     System.out.print(". ");
                 } else {
-                    // Cek apakah kendaraan ini baru bergerak atau 'P'
+                    // cek apakah kendaraan ini baru bergerak atau 'P'
                     if (cell == lastMovedVehicle) {
-                        System.out.print(ANSI_YELLOW + cell + ANSI_RESET + " ");  // Kuning
+                        System.out.print(ANSI_YELLOW + cell + ANSI_RESET + " ");  // kuning
                     } else if (cell == 'P') {
-                        System.out.print(ANSI_RED + cell + ANSI_RESET + " ");     // Merah
+                        System.out.print(ANSI_RED + cell + ANSI_RESET + " ");     // merah
                     } else {
                         System.out.print(cell + " ");
                     }
@@ -173,11 +174,11 @@ public class RushHourGame {
 
     // heuristic
     public int blockingHeuristic() {
-        // Cari posisi kendaraan target
+        // cari posisi kendaraan target
         Vehicle target = targetVehicle;
         int blockingCount = 0;
         
-        // Asumsikan kendaraan target horizontal dan exit di sebelah kanan
+        // asumsikan kendaraan target horizontal dan exit di sebelah kanan
         if (target.isHorizontal()) {
             int row = target.getRow();
             int endCol = target.getCol() + target.getLength() - 1;
@@ -188,7 +189,7 @@ public class RushHourGame {
                 }
             }
         }
-        // Jika vertikal, perlu disesuaikan
+        // jika vertikal, perlu disesuaikan
         else {
             int col = target.getCol();
             int endRow = target.getRow() + target.getLength() - 1;
@@ -206,21 +207,12 @@ public class RushHourGame {
     public boolean isSolved() {
     Vehicle target = targetVehicle;
     if (target.isHorizontal()) {
-        // For horizontal vehicles, the head is at the rightmost position when the vehicle is P
         int headCol = target.getCol() + target.getLength() - 1;
 
-        // System.out.println("headCol: " + headCol);
-        // System.out.println("exitPosition: " + exitPosition.getCol());
-        
-        // Check if the head is right behind the exit position (K)
-        // Assuming K is to the right of the puzzle
         return headCol + 1 == exitPosition.getCol() && target.getRow() == exitPosition.getRow();
     } else {
-        // For vertical vehicles, the head is at the bottom position when the vehicle is P
         int headRow = target.getRow() + target.getLength() - 1;
-        
-        // Check if the head is right above the exit position (K)
-        // Assuming K is at the bottom of the puzzle
+
         return headRow + 1 == exitPosition.getRow() && target.getCol() == exitPosition.getCol();
     }
 }
@@ -228,32 +220,22 @@ public class RushHourGame {
     public List<RushHourGame> generateNextStates() {
     List<RushHourGame> nextStates = new ArrayList<>();
     for (Vehicle vehicle : vehicles.values()) {
-        // Try moving left/up
+        //try moving up/left
         if (canMove(vehicle, -1)) {
             RushHourGame newState = new RushHourGame(this);
             newState.moveVehicle(vehicle.getId(), -1);
             newState.lastMove = new Move(vehicle.getId(), vehicle.isHorizontal() ? "LEFT" : "UP", 1);
             
-            // // Debug
-            // if (vehicle.getId() == 'P') {
-            //     System.out.println("Generated new state for P (after moving LEFT/UP):");
-            //     newState.displayBoard();
-            // }
             
             nextStates.add(newState);
         }
         
-        // Try moving right/down
+        // try moving right/down
         if (canMove(vehicle, 1)) {
             RushHourGame newState = new RushHourGame(this);
             newState.moveVehicle(vehicle.getId(), 1);
             newState.lastMove = new Move(vehicle.getId(), vehicle.isHorizontal() ? "RIGHT" : "DOWN", 1);
-            
-            // // Debug
-            // if (vehicle.getId() == 'P') {
-            //     System.out.println("Generated new state for P (after moving RIGHT/DOWN):");
-            //     newState.displayBoard();
-            // }
+        
             
             nextStates.add(newState);
         }
@@ -264,25 +246,25 @@ public class RushHourGame {
 
     boolean canMove(Vehicle vehicle, int direction) {
         if (vehicle.isHorizontal()) {
-            if (direction < 0) { // Left
+            if (direction < 0) { // left
                 int newCol = vehicle.getCol() - 1;
                 return newCol >= 0 && board[vehicle.getRow()][newCol] == '.';
-            } else { // Right
+            } else { // right
                 int newCol = vehicle.getCol() + vehicle.getLength();
                 return newCol < cols && board[vehicle.getRow()][newCol] == '.';
             }
         } else {
-            if (direction < 0) { // Up
+            if (direction < 0) { // up
                 int newRow = vehicle.getRow() - 1;
                 return newRow >= 0 && board[newRow][vehicle.getCol()] == '.';
-            } else { // Down
+            } else { // down
                 int newRow = vehicle.getRow() + vehicle.getLength();
                 return newRow < rows && board[newRow][vehicle.getCol()] == '.';
             }
         }
     }
 
-    private char lastMovedVehicle = '\0';  // Menyimpan ID kendaraan terakhir yang bergerak
+    private char lastMovedVehicle = '\0';  // menyimpan ID kendaraan terakhir yang bergerak
 
     public void moveVehicle(char vehicleId, int direction) {
         Vehicle vehicle = vehicles.get(vehicleId);
@@ -290,7 +272,7 @@ public class RushHourGame {
         int col = vehicle.getCol();
         int length = vehicle.getLength();
 
-        // Clear current position
+        // clear current position
         if (vehicle.isHorizontal()) {
             for (int i = 0; i < length; i++) {
                 board[row][col + i] = '.';
@@ -301,14 +283,14 @@ public class RushHourGame {
             }
         }
 
-        // Update position
+        // update position
         if (vehicle.isHorizontal()) {
             vehicle.setCol(direction < 0 ? col - 1 : col + 1);
         } else {
             vehicle.setRow(direction < 0 ? row - 1 : row + 1);
         }
 
-        // Set new position
+        // set new position
         row = vehicle.getRow();
         col = vehicle.getCol();
         if (vehicle.isHorizontal()) {
@@ -321,16 +303,13 @@ public class RushHourGame {
             }
         }
 
-        lastMovedVehicle = vehicleId;  // Simpan ID kendaraan yang baru bergerak
-
-        // Update targetVehicle jika 'P' bergerak
+        lastMovedVehicle = vehicleId;  
         if (vehicleId == 'P') {
             targetVehicle = new Vehicle(vehicle);
         }
     }
 
 
-    // Heuristic functions
     public int calculateHeuristic() {
         return blockingHeuristic() + distanceToExit();
     }

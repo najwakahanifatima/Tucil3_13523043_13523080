@@ -1,21 +1,13 @@
 
-package utils;
 
+
+package algorithms;
 import java.util.*;
+import utils.Move;
+import utils.RushHourGame;
 
-/**
- * Main solver class that provides methods to solve Rush Hour puzzles
- * using various algorithms.
- */
 public class RushHourSolver {
     
-    /**
-     * Solves a Rush Hour puzzle using the selected algorithm
-     * 
-     * @param initialState The initial game state
-     * @param algorithm The algorithm to use (e.g., "astar", "bfs", "dfs")
-     * @return List of moves that lead to the solution, or null if no solution found
-     */
     public static List<Move> solve(RushHourGame initialState, String algorithm) {
         SearchAlgorithm searchAlgorithm;
         
@@ -23,13 +15,7 @@ public class RushHourSolver {
             case "astar":
                 searchAlgorithm = new AStarAlgorithm();
                 break;
-            // Add more algorithms as needed
-            // case "bfs":
-            //     searchAlgorithm = new BFSAlgorithm();
-            //     break;
-            // case "dfs":
-            //     searchAlgorithm = new DFSAlgorithm();
-            //     break;
+            
             default:
                 throw new IllegalArgumentException("Unsupported algorithm: " + algorithm);
         }
@@ -44,20 +30,12 @@ public class RushHourSolver {
         return moves;
     }
     
-    /**
-     * Convenience method to solve using A* algorithm
-     */
+    
     public static List<Move> solveWithAStar(RushHourGame initialState) {
         return solve(initialState, "astar");
     }
     
-    /**
-     * Measures performance metrics when solving a puzzle
-     * 
-     * @param initialState The initial game state
-     * @param algorithm The algorithm to use
-     * @return A map containing performance metrics
-     */
+   
     public static Map<String, Object> solveWithMetrics(RushHourGame initialState, String algorithm) {
         long startTime = System.currentTimeMillis();
         List<Move> solution = solve(initialState, algorithm);

@@ -2,10 +2,8 @@ package utils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Node class for the search algorithm that stores state, path information, and A* specific metrics
- */
-class SearchNode implements Comparable<SearchNode> {
+
+public class SearchNode implements Comparable<SearchNode> {
     private final RushHourGame state;
     private final int gScore;     // g(n): cost from start to this node
     private final int hScore;     // h(n): heuristic estimate from this node to the goal
@@ -42,13 +40,13 @@ class SearchNode implements Comparable<SearchNode> {
 
     @Override
     public int compareTo(SearchNode other) {
-        // Compare by f-score first
+        // compare by f-score first
         int fComparison = Integer.compare(this.fScore, other.fScore);
         if (fComparison != 0) {
             return fComparison;
         }
         
-        // Break ties using h-score (prefer nodes closer to the goal)
+        // (prefer nodes closer to the goal)
         return Integer.compare(this.hScore, other.hScore);
     }
 }

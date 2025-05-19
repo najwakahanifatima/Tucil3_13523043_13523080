@@ -1,13 +1,13 @@
-package utils;
+package algorithms;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import utils.Move;
+import utils.RushHourGame;
 
-/**
- * Abstract class defining the interface for search algorithms
- */
-abstract class SearchAlgorithm {
-    // Metrics tracking
+
+public abstract class SearchAlgorithm {
+    // metrics tracking
     protected int nodesExpanded = 0;
     protected int nodesGenerated = 0;
     protected int maxQueueSize = 0;
@@ -22,11 +22,6 @@ abstract class SearchAlgorithm {
         return nextStates;
     }
     
-    /**
-     * Get metrics collected during search
-     * 
-     * @return Map of metrics
-     */
     public Map<String, Integer> getMetrics() {
         Map<String, Integer> metrics = new HashMap<>();
         metrics.put("nodesExpanded", nodesExpanded);

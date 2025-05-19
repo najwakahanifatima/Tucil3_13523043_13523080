@@ -1,8 +1,8 @@
 
+import algorithms.RushHourSolver;
 import java.util.List;
 import utils.Move;
 import utils.RushHourGame;
-import utils.RushHourSolver;
 import utils.SaveLoad;
 
 public class Main {
