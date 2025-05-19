@@ -1,4 +1,5 @@
 package utils;
+
 public class Vehicle {
     private char id;
     private int row;
