@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import utils.Position;
 import utils.RushHourGame;
 import utils.State;
@@ -125,17 +126,14 @@ public class Algorithm {
             Arrays.fill(board[i], '.');
         }
 
-            for (Vehicle v : vehicles.values()) {
+        for (Vehicle v : vehicles.values()) {
             for (int i = 0; i < v.getLength(); i++) {
                 int r = v.getRow() + (v.isHorizontal() ? 0 : i);
                 int c = v.getCol() + (v.isHorizontal() ? i : 0);
-                board[r][c] = v.getId();
+                if (r >= 0 && r < rows && c >= 0 && c < cols) {
+                    board[r][c] = v.getId();
+                }
             }
-        }
-
-        Position exit = game.getExitPosition();
-        if (board[exit.getRow()][exit.getCol()] == '.') {
-            board[exit.getRow()][exit.getCol()] = 'K';
         }
 
         return board;
@@ -184,15 +182,21 @@ public class Algorithm {
         }
 
         Position exit = game.getExitPosition();
-        if (board[exit.getRow()][exit.getCol()] == '.') {
-            board[exit.getRow()][exit.getCol()] = 'K';
-        }
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 System.out.print(board[i][j]);
+                if ((i+1 == exit.getRow() && j == exit.getCol())|| (j+1 == exit.getCol() && i == exit.getRow())) {
+                    System.out.print("K");
+                }
             }
             System.out.println();
+        }
+    }
+
+    private void debugUnexplored(PriorityQueue<State> unexplored) {
+        for (State s : unexplored) {
+            System.out.println("move: " + s.move + " --- h(n): " + Heuristic.calculateHeuristicGreedy(s));
         }
     }
 }
