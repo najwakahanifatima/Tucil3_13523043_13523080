@@ -1,46 +1,12 @@
 package algorithms;
 
-import java.util.*;
 import utils.Position;
 import utils.RushHourGame;
 import utils.State;
 import utils.Vehicle;
 
-public class GreedyBFSSolver extends Algorithm {
-
-    public GreedyBFSSolver(RushHourGame game) {
-        super(game);
-    }
-
-    public List<State> solve() {
-
-        PriorityQueue<State> unexplored = new PriorityQueue<>(Comparator.comparingInt(this::calculateHeuristic));
-        Set<String> explored = new HashSet<>();
-
-        State start = new State(cloneVehicleMap(game.getVehicles()), 0, null, "");
-        unexplored.add(start);
-
-        while (!unexplored.isEmpty()) {
-            State current = unexplored.poll();
-            String stateString = current.getStateString();
-
-            if (explored.contains(stateString)) continue;
-            explored.add(stateString);
-
-            if (isGoal(current)) {
-                return constructPath(current);
-            }
-
-            List<State> neighbours = getNeighbours(current);
-            neighbours.sort(Comparator.comparingInt(this::calculateHeuristic));
-            unexplored.addAll(neighbours);
-        }
-
-        return null;
-    }
-
-    // nanti ubah aja sesuai heuristik
-    private int calculateHeuristic(State State) {
+public class Heuristic {
+    private static int blockingHeuristic(State State, RushHourGame game) {
         Vehicle target = State.getVehicle().get('P');
         Position exit = game.getExitPosition();
 
@@ -67,4 +33,21 @@ public class GreedyBFSSolver extends Algorithm {
         }
         return blockingCount + distanceToExit;
     }
+
+    public static int calculateHeuristicAstar(State state, RushHourGame game) {
+        return blockingHeuristic(state, game) + distanceToExit(state, game);
+    }
+
+    private static int distanceToExit(State state, RushHourGame game) {
+        Vehicle target = state.getVehicle().get('P');
+        Position exitPosition = game.getExitPosition();
+        if (target.isHorizontal()) {
+            int endCol = target.getCol() + target.getLength() - 1;
+            return exitPosition.getCol() - endCol;
+        } else {
+            int endRow = target.getRow() + target.getLength() - 1;
+            return exitPosition.getRow() - endRow;
+        }
+    }
+    
 }

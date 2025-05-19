@@ -28,4 +28,8 @@ public class State implements Comparable<State> {
         Collections.sort(ids);
         return String.join("|", ids);
     }
+
+    public Map<Character, Vehicle> getVehicle() {
+        return vehicles;
+    }
 }

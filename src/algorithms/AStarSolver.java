@@ -1,42 +1,40 @@
 package algorithms;
 
 import java.util.*;
-import utils.*;
+import utils.RushHourGame;
+import utils.State;
 
-public class UCSSolver extends Algorithm {
-    
-    public UCSSolver(RushHourGame game) {
+public class AStarSolver extends Algorithm {
+
+    public AStarSolver(RushHourGame game) {
         super(game);
     }
 
     public List<State> solve() {
-        // cek priority queue dengan cost terendah
-        PriorityQueue<State> unexplored = new PriorityQueue<>(Comparator.comparingInt(n -> n.cost));
-        // explored state
+
+        PriorityQueue<State> unexplored = new PriorityQueue<>(Comparator.comparingInt(state -> Heuristic.calculateHeuristicAstar(state, game)));
         Set<String> explored = new HashSet<>();
 
-        // initial state
         State start = new State(cloneVehicleMap(game.getVehicles()), 0, null, "");
         unexplored.add(start);
 
-        // iterate sampai ketemu goals atau semua kemungkinan state sudah habis dicek
         while (!unexplored.isEmpty()) {
             State current = unexplored.poll();
             String stateString = current.getStateString();
 
-            // klo state sudah dieksplor, skip
             if (explored.contains(stateString)) continue;
             explored.add(stateString);
 
-            // klo udah sampai goal, buat path
             if (isGoal(current)) {
                 return constructPath(current);
             }
 
-            // klo blm sampai goal, eksplor all neighbour state
-            unexplored.addAll(getNeighbours(current));
+            List<State> neighbours = getNeighbours(current);
+            neighbours.sort(Comparator.comparingInt(state -> Heuristic.calculateHeuristicAstar(state, game)));
+            unexplored.addAll(neighbours);
         }
 
         return null;
     }
+
 }
