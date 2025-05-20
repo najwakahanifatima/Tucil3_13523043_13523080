@@ -1,7 +1,11 @@
 package utils;
 
+import algorithms.AStarSolver;
+import algorithms.GreedyBFSSolver;
+import algorithms.UCSSolver;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class RushHourGame {
@@ -17,6 +21,12 @@ public class RushHourGame {
     private Map<Character, Vehicle> vehicles;
     private Vehicle targetVehicle;
     private Position exitPosition;
+
+    public long startTime;
+    public long endTime;
+    public List<State> solution;
+    public int steps;
+    public int nodes;
 
 
     
@@ -44,10 +54,11 @@ public class RushHourGame {
     private void parseInput(String input) {
         String[] lines = input.split("\\r?\\n"); // Support Windows + Unix line endings
         String[] dimensions = lines[0].trim().split("\\s+");
-        int specifiedRows = Integer.parseInt(dimensions[0]);
-        int specifiedCols = Integer.parseInt(dimensions[1]);
+        rows = Integer.parseInt(dimensions[0]);
+        cols = Integer.parseInt(dimensions[1]);
         numVehicles = Integer.parseInt(lines[1].trim());
         board = new char[rows][cols];
+
         for (char[] row : board) {
             Arrays.fill(row, ' ');
         }
@@ -69,6 +80,7 @@ public class RushHourGame {
         // cek baris di bawah papan 
         if (lines.length > rows + 2) {
             String bottomLine = lines[rows + 2];
+            System.out.println(bottomLine);
             for (int j = 0; j < bottomLine.length(); j++) {
                 if (bottomLine.charAt(j) == 'K') {
                     // K di bawah papan 
@@ -271,6 +283,64 @@ public class RushHourGame {
 
     public char getChar(int row, int col) {
         return board[row][col];
+    }
+
+    public void solveGame(int algorithm, int heuristic) {
+        if (!isPossible()) {
+            solution = null;
+            startTime = 0;
+            endTime = 0;
+            steps = 0;
+            nodes = 0;
+            return;
+        }
+
+        // start game
+        startTime = System.currentTimeMillis();
+        switch (algorithm) {
+            case 1:
+                {
+                    UCSSolver solver = new UCSSolver(this);
+                    solution = solver.solve();
+                    steps = solver.displaySolution(solution);
+                    nodes = solver.getNodeCount();
+                    break;
+                }
+            case 2:
+                {
+                    GreedyBFSSolver solver = new GreedyBFSSolver(this);
+                    solution = solver.solve();
+                    steps = solver.displaySolution(solution);
+                    nodes = solver.getNodeCount();
+                    break;
+                }
+            default:
+                {
+                    AStarSolver solver = new AStarSolver(this);
+                    solution = solver.solve();
+                    steps = solver.displaySolution(solution);
+                    nodes = solver.getNodeCount();
+                    break;
+                }
+        }
+        
+        endTime = System.currentTimeMillis();
+    }
+
+    private boolean isPossible() {
+        int exitRow = exitPosition.getRow();
+        int exitCol = exitPosition.getCol();
+        
+        if (targetVehicle.isHorizontal()) {
+            if (targetVehicle.getRow() != exitRow) {
+                return false;
+            }
+        } else {
+            if (targetVehicle.getCol() != exitCol) {
+                return false;
+            }
+        }
+        return true;
     }
     
 }
