@@ -1,5 +1,5 @@
 # Rush Hour Game Solver 🚗⌚
-![image](https://github.com/user-attachments/assets/eea3b520-bdc6-43a5-8892-c2cea1771383)
+![image](https://github.com/user-attachments/assets/6467464d-d989-441f-a940-a19d42566c2f)
 
 ## Overview
 This program is an automated solver for the classic Rush Hour puzzle game, where the goal is to move the red car out of a congested (commonly) 6x6 grid by sliding other vehicles out of its way. This solver uses a pathfinding algorithm to efficiently find a sequence of moves that leads the red car to the exit. Specifically, it treats each game state as a state and explores possible moves using uninformed and informed search strategies. 
