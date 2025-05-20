@@ -54,29 +54,35 @@ private void parseInput(String input) {
     }
 
     for (int i = 0; i < lines.length - 2; i++) { 
-        String line = lines[i + 2].trim();
+        String line = lines[i + 2];
         int boardCol = 0;
         
         for (int j = 0; j < line.length(); j++) {
             char c = line.charAt(j);
-            if (c == ' ') continue;
 
             if (c == 'K') {
-                // bawah
-                if (i == rows - 1) { 
-                    exitPosition = new Position(rows, boardCol); 
+                if (i == rows) { // bawah
+                    System.out.println("bawah");
+                    exitPosition = new Position(rows, j); 
+                } else if (j == 0) { // Kiri
+                    System.out.println("kiri");
+                    exitPosition = new Position(i, -1);
+                } else if (i == 0) { // Atas
+                    System.out.println("atas");
+                    exitPosition = new Position(-1, j);
+                } else if (j == line.length() - 1) { // Kanan
+                    System.out.println("kanan");
+                    exitPosition = new Position(i, cols);
                 }
-                else if (j == 0) exitPosition = new Position(i, -1); // Kiri
-                else if (i == 0) exitPosition = new Position(-1, j); // Atas
-                else if (j == line.length() - 1) exitPosition = new Position(i, cols); // Kanan
-            } 
-            else if ((c >= 'A' && c <= 'Z') || c == '.') {
+            } else if ((c >= 'A' && c <= 'Z') || c == '.') {
                 if (i < rows && boardCol < cols) {
                     board[i][boardCol++] = c;
                 }
             }
         }
     }
+
+    // displayBoard();
 }
 
     private void identifyVehicles() {

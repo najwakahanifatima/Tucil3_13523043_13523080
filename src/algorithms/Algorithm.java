@@ -24,24 +24,41 @@ public class Algorithm {
         Position exitPosition = game.getExitPosition();
 
         if (target.isHorizontal()) {
+            int row = target.getRow();
+            int tailCol = target.getCol();
             int headCol = target.getCol() + target.getLength() - 1;
 
-            return headCol + 1 == exitPosition.getCol() && target.getRow() == exitPosition.getRow();
+            return ((headCol + 1 == exitPosition.getCol() || tailCol - 1 == exitPosition.getCol())
+                    && row == exitPosition.getRow());
         } else {
+            int col = target.getCol();
+            int tailRow = target.getRow();
             int headRow = target.getRow() + target.getLength() - 1;
 
-            return headRow + 1 == exitPosition.getRow() && target.getCol() == exitPosition.getCol();
+            return (headRow + 1 == exitPosition.getRow() || tailRow - 1 == exitPosition.getRow())
+                    && col == exitPosition.getCol();
         }
     }
 
+
     protected boolean canExitHorizontal(Vehicle target, Position exit, Map<Character, Vehicle> vehicles) {
         int row = target.getRow();
-        int edge = target.getCol() + target.getLength();
+        int startCol, endCol;
 
-        for (int col = edge; col <= exit.getCol(); col++) {
-            //cek apakah ada vehicle yang menghalangi
+        if (exit.getCol() < target.getCol()) {
+            // exit is on the left side
+            startCol = exit.getCol() + 1;
+            endCol = target.getCol() - 1;
+        } else {
+            // exit is on the right side
+            startCol = target.getCol() + target.getLength();
+            endCol = exit.getCol();
+        }
+
+        for (int col = startCol; col <= endCol; col++) {
             for (Vehicle v : vehicles.values()) {
-                if (v.getId() == target.getId()) continue; // skip klo target
+                if (v.getId() == target.getId()) continue;
+
                 if (v.isHorizontal()) {
                     if (v.getRow() == row && col >= v.getCol() && col < v.getCol() + v.getLength()) {
                         return false;
@@ -53,17 +70,29 @@ public class Algorithm {
                 }
             }
         }
+
         return true;
     }
 
+
     protected boolean canExitVertical(Vehicle target, Position exit, Map<Character, Vehicle> vehicles) {
         int col = target.getCol();
-        int targetBottomEdge = target.getRow() + target.getLength();
-        
-        for (int row = targetBottomEdge; row <= exit.getRow(); row++) {
+        int startRow, endRow;
+
+        if (exit.getRow() < target.getRow()) {
+            // exit is on the top side
+            startRow = exit.getRow() + 1;
+            endRow = target.getRow() - 1;
+        } else {
+            // exit is on the bottom side
+            startRow = target.getRow() + target.getLength();
+            endRow = exit.getRow();
+        }
+
+        for (int row = startRow; row <= endRow; row++) {
             for (Vehicle v : vehicles.values()) {
                 if (v.getId() == target.getId()) continue;
-                
+
                 if (v.isHorizontal()) {
                     if (row == v.getRow() && col >= v.getCol() && col < v.getCol() + v.getLength()) {
                         return false;
@@ -75,9 +104,10 @@ public class Algorithm {
                 }
             }
         }
-        
+
         return true;
     }
+
 
     protected List<State> getNeighbours(State state) {
         List<State> neighbours = new ArrayList<>();
@@ -183,20 +213,29 @@ public class Algorithm {
 
         Position exit = game.getExitPosition();
 
+        // if (exit.getRow() == -1) { // exit gate di atas
+        //     for (int i = 0; i < exit.getCol(); i++) {
+        //         System.out.print(" ");
+        //     }
+        //     System.out.println("K");
+        // }
+
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 System.out.print(board[i][j]);
                 if ((i+1 == exit.getRow() && j == exit.getCol())|| (j+1 == exit.getCol() && i == exit.getRow())) {
-                    System.out.print("K");
+                    // System.out.print("K");
                 }
             }
             System.out.println();
         }
     }
 
-    private void debugUnexplored(PriorityQueue<State> unexplored) {
+    protected void debugUnexplored(PriorityQueue<State> unexplored) {
         for (State s : unexplored) {
-            System.out.println("move: " + s.move + " --- h(n): " + Heuristic.calculateHeuristicGreedy(s, game, 1) + " --- f(n): " + (s.cost + Heuristic.calculateHeuristicGreedy(s, game, 1)));
+            System.out.println("move: " + s.move + " --- h(n): " + Heuristic.calculateHeuristicGreedy(s, game, 1) + " --- f(n): " +
+            (s.cost + Heuristic.calculateHeuristicGreedy(s, game, 1)));
         }
+        System.out.println();
     }
 }

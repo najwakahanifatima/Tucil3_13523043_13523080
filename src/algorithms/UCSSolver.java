@@ -35,6 +35,8 @@ public class UCSSolver extends Algorithm {
 
             // klo blm sampai goal, eksplor all neighbour state
             unexplored.addAll(getNeighbours(current));
+
+            // debugUnexplored(unexplored);
         }
 
         return null;
