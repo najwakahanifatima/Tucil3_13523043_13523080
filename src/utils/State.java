@@ -8,11 +8,16 @@ public class State implements Comparable<State> {
     public State parent;
     public String move;
 
+
     public State(Map<Character, Vehicle> vehicles, int cost, State parent, String move) {
         this.vehicles = vehicles;
         this.cost = cost;
         this.parent = parent;
         this.move = move;
+    }
+
+    public int getCost(){
+        return cost;
     }
 
     @Override
@@ -27,5 +32,9 @@ public class State implements Comparable<State> {
         }
         Collections.sort(ids);
         return String.join("|", ids);
+    }
+
+    public Map<Character, Vehicle> getVehicle() {
+        return vehicles;
     }
 }
