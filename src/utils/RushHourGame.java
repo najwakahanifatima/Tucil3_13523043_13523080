@@ -1,6 +1,7 @@
 package utils;
 
 import algorithms.AStarSolver;
+import algorithms.BeamSearchSolver;
 import algorithms.GreedyBFSSolver;
 import algorithms.UCSSolver;
 import java.util.Arrays;
@@ -285,7 +286,7 @@ public class RushHourGame {
         return board[row][col];
     }
 
-    public void solveGame(int algorithm, int heuristic) {
+    public void solveGame(int algorithm, int heuristic, int beamWidth) {
         if (!isPossible()) {
             solution = null;
             startTime = 0;
@@ -309,6 +310,14 @@ public class RushHourGame {
             case 2:
                 {
                     GreedyBFSSolver solver = new GreedyBFSSolver(this, heuristic);
+                    solution = solver.solve();
+                    steps = solver.displaySolution(solution);
+                    nodes = solver.getNodeCount();
+                    break;
+                }
+            case 3:
+                {
+                    BeamSearchSolver solver = new BeamSearchSolver(this, heuristic, beamWidth);
                     solution = solver.solve();
                     steps = solver.displaySolution(solution);
                     nodes = solver.getNodeCount();

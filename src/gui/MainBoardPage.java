@@ -33,7 +33,7 @@ public class MainBoardPage {
     private RushHourGame game;
     private BorderPane layout;
     private final Integer CELL_SIZE = 60;
-    private final List<String> algorithms = Arrays.asList("Uniform Cost Search", "Greedy Best First Search", "A* Algorithm");
+    private final List<String> algorithms = Arrays.asList("Uniform Cost Search", "Greedy Best First Search", "A* Algorithm", "Beam Search");
     private final List<String> heuristics = Arrays.asList("Blocking Vehicles", "Manhattan Distance");
     private final List<Color> otherColors = Arrays.asList(
             Color.LIGHTBLUE, Color.ORANGE, Color.PURPLE, Color.DARKCYAN,
@@ -77,17 +77,19 @@ public class MainBoardPage {
             chosenHeuristic = heuristicOptions.getValue();
         });
 
+        
         Button solveButton = new Button("Solve");
         solveButton.setOnAction(e -> {
             int algo = 1, heu = 1;
             if (chosenAlgorithm.equals(algorithms.get(0))) algo = 1;
             if (chosenAlgorithm.equals(algorithms.get(1))) algo = 2;
             if (chosenAlgorithm.equals(algorithms.get(2))) algo = 3;
+            if (chosenAlgorithm.equals(algorithms.get(3))) algo = 4;
 
             if (chosenHeuristic.equals(heuristics.get(0))) heu = 1;
             if (chosenHeuristic.equals(heuristics.get(1))) heu = 2;
 
-            game.solveGame(algo, heu);
+            game.solveGame(algo, heu, beamWidth);
 
             if (game.solution != null) {
                 // update stats labels

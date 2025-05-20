@@ -10,6 +10,7 @@ public class Main {
         RushHourGame game = new RushHourGame(input);
         int algorithm;
         int heuristic;
+        int beamWidth = 0;
 
         Scanner scanner = new Scanner(System.in);
 
@@ -19,13 +20,20 @@ public class Main {
             System.out.println(" 1. Uniform Cost Search");
             System.out.println(" 2. Greedy Best First Search");
             System.out.println(" 3. A* Algorithm");
+            System.out.println(" 4. Beam Search");
 
             System.out.print("Your choice (number): ");
             algorithm = scanner.nextInt();
             scanner.nextLine();
-            if (algorithm > 3 || algorithm < 1) {
+            if (algorithm > 4 || algorithm < 1) {
                 System.out.println();
                 continue;
+            }
+            
+            if (algorithm == 4) {
+                System.out.print("Enter beam width: ");
+                beamWidth = scanner.nextInt();
+                scanner.nextLine();
             }
 
             System.out.println("===== Choose heuristic =====");
@@ -44,7 +52,7 @@ public class Main {
         game.displayBoard();
 
         // solve game based on heuristic
-        game.solveGame(algorithm, heuristic);
+        game.solveGame(algorithm, heuristic, beamWidth);
 
         // ouput file
         System.out.println("Masukkan output filename (without .txt): ");
