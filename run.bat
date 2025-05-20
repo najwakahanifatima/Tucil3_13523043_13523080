@@ -1,31 +1,36 @@
 @echo off
-echo Compiling Java files...
-
-REM Create bin directory if it doesn't exist
-if not exist bin mkdir bin
-
-REM Collect all Java files except those in gui directories
 setlocal enabledelayedexpansion
-set files=
 
-for /R src %%f in (*.java) do (
-    REM Check if the path contains \gui\
-    echo %%f | findstr /i "\\gui\\" >nul
-    if errorlevel 1 (
-        REM If not found, add to files list
-        set files=!files! "%%f"
-    )
+set MODULE_PATH=lib/javafx-sdk-24.0.1/lib
+set MODULES=javafx.controls
+set OUTPUT_DIR=bin
+
+if not exist %OUTPUT_DIR% (
+    mkdir %OUTPUT_DIR%
 )
 
-REM Compile all files together
-javac -d bin !files!
+:: Collect all .java files in src
+set FILES=
 
-IF %ERRORLEVEL% NEQ 0 (
+for /r src %%f in (*.java) do (
+    set FILES=!FILES! "%%f"
+)
+
+:: Compile all Java files
+echo Compiling all Java files...
+javac --module-path %MODULE_PATH% --add-modules %MODULES% -d %OUTPUT_DIR% %FILES%
+
+if errorlevel 1 (
     echo Compilation failed.
-    exit /b %ERRORLEVEL%
+    exit /b 1
 )
 
-echo Running the program...
-java -cp bin Main
+:: Copy all non-Java resources (like images) to bin
+xcopy /E /Y /I src\gui\*.png %OUTPUT_DIR%\gui\
+xcopy /E /Y /I src\gui\*.css %OUTPUT_DIR%\gui\
 
-pause
+:: Run MainApp
+echo Running MainApp...
+java --module-path %MODULE_PATH% --add-modules %MODULES% -cp %OUTPUT_DIR% gui.MainApp
+
+endlocal
