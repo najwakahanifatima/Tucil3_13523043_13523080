@@ -86,7 +86,6 @@ public class MainBoardPage {
 
             if (chosenHeuristic.equals(heuristics.get(0))) heu = 1;
             if (chosenHeuristic.equals(heuristics.get(1))) heu = 2;
-            if (chosenHeuristic.equals(heuristics.get(2))) heu = 3;
 
             game.solveGame(algo, heu);
 
