@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import utils.RushHourGame;
@@ -42,6 +43,7 @@ public class MainBoardPage {
     );
     private String chosenAlgorithm = algorithms.get(0);
     private String chosenHeuristic = heuristics.get(0);
+    private int beamWidth = 0;
 
     public MainBoardPage(RushHourGame game, MainApp app) {
         this.game = game;
@@ -63,11 +65,18 @@ public class MainBoardPage {
         statsBox.getStyleClass().add("stats-bar");
 
         // SET TOP
+        TextField beamWidthInput = new TextField();
+        beamWidthInput.setPromptText("input beam width here");
+        beamWidthInput.setVisible(false);
+        beamWidthInput.setManaged(false);
+
         ComboBox<String> algorithmOptions = new ComboBox<>();
         algorithmOptions.getItems().addAll(algorithms);
         algorithmOptions.setValue(algorithms.get(0));
         algorithmOptions.setOnAction(e -> {
             chosenAlgorithm = algorithmOptions.getValue();
+            beamWidthInput.setVisible(chosenAlgorithm.equals("Beam Search"));
+            beamWidthInput.setManaged(chosenAlgorithm.equals("Beam Search"));
         });
 
         ComboBox<String> heuristicOptions = new ComboBox<>();
@@ -76,15 +85,22 @@ public class MainBoardPage {
         heuristicOptions.setOnAction(e -> {
             chosenHeuristic = heuristicOptions.getValue();
         });
-
         
         Button solveButton = new Button("Solve");
+
+        HBox top = new HBox(15, algorithmOptions, heuristicOptions, solveButton);
+        top.getChildren().add(beamWidthInput);
+        top.setAlignment(Pos.CENTER);
+
         solveButton.setOnAction(e -> {
             int algo = 1, heu = 1;
             if (chosenAlgorithm.equals(algorithms.get(0))) algo = 1;
             if (chosenAlgorithm.equals(algorithms.get(1))) algo = 2;
             if (chosenAlgorithm.equals(algorithms.get(2))) algo = 3;
-            if (chosenAlgorithm.equals(algorithms.get(3))) algo = 4;
+            if (chosenAlgorithm.equals(algorithms.get(3))) {
+                algo = 4;
+                beamWidth = Integer.parseInt(beamWidthInput.getText().trim());
+            }
 
             if (chosenHeuristic.equals(heuristics.get(0))) heu = 1;
             if (chosenHeuristic.equals(heuristics.get(1))) heu = 2;
@@ -102,13 +118,10 @@ public class MainBoardPage {
                 new Alert(Alert.AlertType.ERROR, "No Solution Found.").showAndWait();
             }
         });
-
-        HBox temp = new HBox(15, algorithmOptions, heuristicOptions, solveButton);
-        temp.setAlignment(Pos.CENTER);
         
         Label header = new Label("Choose the algorithm and heuristic");
         header.getStyleClass().add("game-header");
-        VBox option = new VBox(15, header, temp);
+        VBox option = new VBox(15, header, top);
 
         option.setAlignment(Pos.CENTER);
         layout.setTop(option);

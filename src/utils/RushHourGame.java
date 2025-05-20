@@ -287,6 +287,9 @@ public class RushHourGame {
     }
 
     public void solveGame(int algorithm, int heuristic, int beamWidth) {
+
+        System.out.println("algo: " + algorithm);
+        System.out.println("beam: " + beamWidth);
         if (!isPossible()) {
             solution = null;
             startTime = 0;
@@ -299,9 +302,9 @@ public class RushHourGame {
         // start game
         startTime = System.currentTimeMillis();
         switch (algorithm) {
-            case 1:
+            case 3:
                 {
-                    UCSSolver solver = new UCSSolver(this);
+                    AStarSolver solver = new AStarSolver(this, heuristic);
                     solution = solver.solve();
                     steps = solver.displaySolution(solution);
                     nodes = solver.getNodeCount();
@@ -315,7 +318,7 @@ public class RushHourGame {
                     nodes = solver.getNodeCount();
                     break;
                 }
-            case 3:
+            case 4:
                 {
                     BeamSearchSolver solver = new BeamSearchSolver(this, heuristic, beamWidth);
                     solution = solver.solve();
@@ -325,7 +328,7 @@ public class RushHourGame {
                 }
             default:
                 {
-                    AStarSolver solver = new AStarSolver(this, heuristic);
+                    UCSSolver solver = new UCSSolver(this);
                     solution = solver.solve();
                     steps = solver.displaySolution(solution);
                     nodes = solver.getNodeCount();

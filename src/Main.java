@@ -54,12 +54,11 @@ public class Main {
         // solve game based on heuristic
         game.solveGame(algorithm, heuristic, beamWidth);
 
-        // ouput file
-        System.out.println("Masukkan output filename (without .txt): ");
-        String filePath = scanner.nextLine();
-
         // Output ke console
         if (game.solution != null) {
+            // ouput file
+            System.out.println("Masukkan output filename (without .txt): ");
+            String filePath = scanner.nextLine();
             System.out.println("Total steps : " + game.steps);
             System.out.println("Total nodes explored: " + game.nodes);
             System.out.println("Solution found in " + (game.endTime - game.startTime) + " ms");
