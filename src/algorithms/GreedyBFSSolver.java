@@ -38,8 +38,6 @@ public class GreedyBFSSolver extends Algorithm {
             List<State> neighbours = getNeighbours(current);
             neighbours.sort(Comparator.comparingInt(s -> Heuristic.calculateHeuristicGreedy(s, game, heuristic)));
             unexplored.addAll(neighbours);
-
-            // debugUnexplored(unexplored);
         }
         System.out.println("Total nodes explored: " + nodeCount);
         return null;

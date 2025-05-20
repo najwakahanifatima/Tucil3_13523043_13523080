@@ -5,6 +5,13 @@ import utils.SaveLoad;
 
 public class Main {
     public static void main(String[] args) {
+
+        System.out.println("██████  ██    ██ ███████ ██   ██     ██   ██  ██████  ██    ██ ██████      ███████  ██████  ██      ██    ██ ███████ ██████ ");
+        System.out.println("██   ██ ██    ██ ██      ██   ██     ██   ██ ██    ██ ██    ██ ██   ██     ██      ██    ██ ██      ██    ██ ██      ██   ██");
+        System.out.println("██████  ██    ██ ███████ ███████     ███████ ██    ██ ██    ██ ██████      ███████ ██    ██ ██      ██    ██ █████   ██████ ");
+        System.out.println("██   ██ ██    ██      ██ ██   ██     ██   ██ ██    ██ ██    ██ ██   ██          ██ ██    ██ ██       ██  ██  ██      ██   ██");
+        System.out.println("██   ██  ██████  ███████ ██   ██     ██   ██  ██████   ██████  ██   ██     ███████  ██████  ███████   ████   ███████ ██   ██");
+        
         SaveLoad system = new SaveLoad();
         String input = system.Load();
         RushHourGame game = new RushHourGame(input);

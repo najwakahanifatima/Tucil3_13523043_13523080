@@ -17,10 +17,6 @@ public class AStarSolver extends Algorithm {
     public List<State> solve() {
         nodeCount = 0;
         Map<String, Integer> gScores = new HashMap<>();
-        
-        // priority queue with f(n) = g(n) + h(n) ordering
-        
-        // sesuain nanti opsinya
         PriorityQueue<State> openSet = new PriorityQueue<>((s1, s2) -> {
             int f1 = s1.getCost() + Heuristic.calculateHeuristicAstar(s1, game, heuristic);
             int f2 = s2.getCost() + Heuristic.calculateHeuristicAstar(s2, game, heuristic);
@@ -38,35 +34,27 @@ public class AStarSolver extends Algorithm {
             //state with lowest f score
             State currentState = openSet.poll();
             String currentStateKey = currentState.getStateString();
-            
-           
-
             if (isGoal(currentState, game)) {
                 System.out.println("Total nodes explored: " + nodeCount);
                 return constructPath(currentState);
             }
-            
-            // skip kalau sudah pernah
+
             if (closedSet.contains(currentStateKey)) {
                 continue;
             }
             nodeCount++;
             
-            // mark as processed
             closedSet.add(currentStateKey);
-            
-            // neighbor states
+
             for (State nextState : getNeighbours(currentState)) {
                 String nextStateKey = nextState.getStateString();
-                
-                // Skip if already fully processed
+
                 if (closedSet.contains(nextStateKey)) {
                     continue;
                 }
                 
                 int tentativeGScore = currentState.getCost() + 1;
-                
-                // cek apakah solusinya lebih bagus
+            
                 if (!gScores.containsKey(nextStateKey) || tentativeGScore < gScores.get(nextStateKey)) {
                     // update best known cost to this state
                     gScores.put(nextStateKey, tentativeGScore);

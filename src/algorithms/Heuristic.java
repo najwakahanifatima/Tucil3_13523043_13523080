@@ -7,8 +7,6 @@ import utils.Vehicle;
 
 public class Heuristic {
     
-    // belum berhasil
-
     public static int manhattanDistance(State state, RushHourGame game) {
         Vehicle playerVehicle = state.getVehicle().get('P');
         Position exitPosition = game.getExitPosition();
@@ -28,7 +26,6 @@ public class Heuristic {
         Vehicle playerVehicle = state.getVehicle().get('P');
         int playerEndCol = playerVehicle.getCol() + playerVehicle.getLength() - 1;
         
-        // count blocking vehicles
         int blockingCount = 0;
         int playerRow = playerVehicle.getRow();
         
@@ -68,7 +65,6 @@ public class Heuristic {
         Vehicle playerVehicle = state.getVehicle().get('P');
         Position exitPosition = game.getExitPosition();
         
-        // distance calculation
         int playerEndCol = playerVehicle.getCol() + playerVehicle.getLength() - 1;
         int distanceToExit = Math.max(0, exitPosition.getCol() - playerEndCol);
         
