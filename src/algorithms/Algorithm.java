@@ -1,5 +1,7 @@
 package algorithms;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,7 +19,7 @@ public class Algorithm {
     public static final String ANSI_YELLOW = "\u001B[43m";  // kuning
     public static final String ANSI_RED = "\u001B[41m";      // merah
     public static final String ANSI_GREEN = "\u001B[32m";  // hijau
-    protected RushHourGame game;
+    protected static RushHourGame game;
 
     public Algorithm(RushHourGame game) {
         this.game = game;
@@ -319,6 +321,127 @@ protected boolean canExitVertical(Vehicle target, Position exit, Map<Character, 
             }
             System.out.println(ANSI_GREEN + "K" + ANSI_RESET + " ");
         }
+    }
+
+    public static void writeSolutionToFile(String filename, List<State> path, int steps, int nodeCount, long duration) {
+        try (FileWriter writer = new FileWriter(filename)) {
+            if (path == null || path.isEmpty()) {
+                writer.write("No solution found.\n");
+                return;
+            }
+
+            int step = 0;
+            writer.write("Step " + step++ + " - Initial state\n");
+            writer.write(boardToString(path.get(0).vehicles, '-') + "\n");
+            writer.write("------------------------\n");
+
+            if (path.size() == 1) return;
+
+            char currentVehicle = '-';
+            State lastState = path.get(0);
+            String lastMove = "";
+
+            for (int i = 1; i < path.size(); i++) {
+                State state = path.get(i);
+                char vehicle = state.move.charAt(0);
+                
+                if (vehicle != currentVehicle) {
+                    if (!lastMove.isEmpty()) {
+                        writer.write("Step " + step++ + "\n");
+                        writer.write("Move: " + lastMove + "\n");
+                        writer.write(boardToString(lastState.vehicles, currentVehicle) + "\n");
+                        writer.write("------------------------\n");
+                    }
+                    currentVehicle = vehicle;
+                }
+                
+                lastState = state;
+                lastMove = state.move;
+            }
+
+            if (!lastMove.isEmpty()) {
+                writer.write("Step " + step + "\n");
+                writer.write("Move: " + lastMove + "\n");
+                writer.write(boardToString(lastState.vehicles, currentVehicle) + "\n");
+                writer.write("------------------------\n");
+            }
+
+            writer.write("\nSummary:\n");
+            writer.write("Total steps: " + steps + "\n");
+            writer.write("Total nodes explored: " + nodeCount + "\n");
+            writer.write("Solution found in " + duration + " ms\n");
+        } catch (IOException e) {
+            System.err.println("Error writing to file: " + e.getMessage());
+        }
+    }
+
+    private static String boardToString(Map<Character, Vehicle> vehicles, char id) {
+        StringBuilder sb = new StringBuilder();
+        int rows = game.getBoard().length;
+        int cols = game.getBoard()[0].length;
+        char[][] board = new char[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            Arrays.fill(board[i], '.');
+        }
+
+        for (Vehicle v : vehicles.values()) {
+            for (int i = 0; i < v.getLength(); i++) {
+                int r = v.getRow() + (v.isHorizontal() ? 0 : i);
+                int c = v.getCol() + (v.isHorizontal() ? i : 0);
+                if (r >= 0 && r < rows && c >= 0 && c < cols) {  
+                    board[r][c] = v.getId();
+                }
+            }
+        }
+
+        Position exit = game.getExitPosition();
+
+        if (exit.getRow() == -1) {
+            for (int j = 0; j < exit.getCol(); j++) {
+                sb.append("  ");
+            }
+            sb.append("K\n");
+        }
+
+        for (int i = 0; i < rows; i++) {
+            if (exit.getCol() == -1 && i == exit.getRow()) {
+                sb.append("K ");
+            }
+            else if(exit.getCol() == -1) {
+                sb.append("  ");
+            }
+            
+            for (int j = 0; j < cols; j++) {
+                if (i == exit.getRow() && j == exit.getCol() && 
+                    exit.getRow() >= 0 && exit.getCol() >= 0) {
+                    sb.append("K ");
+                    continue;
+                }
+                
+                if (board[i][j] == id) {
+                    sb.append(board[i][j]).append(" ");
+                } else if (board[i][j] == 'P') {
+                    sb.append(board[i][j]).append(" ");
+                } else {
+                    sb.append(board[i][j]).append(" ");
+                }
+            }
+            
+            if (exit.getCol() == cols && i == exit.getRow()) {
+                sb.append("K");
+            }
+            sb.append("\n");
+        }
+
+        if (exit.getRow() == rows) {
+            for (int j = 0; j < exit.getCol(); j++) {
+                sb.append("  ");
+            }
+            sb.append("K\n");
+        }
+
+        return sb.toString();
     }
 
     protected void debugUnexplored(PriorityQueue<State> unexplored) {
