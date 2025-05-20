@@ -1,47 +1,76 @@
-import algorithms.AStarSolver;
 import algorithms.Algorithm;
-import java.util.List;
 import java.util.Scanner;
 import utils.RushHourGame;
 import utils.SaveLoad;
-import utils.State;
 
 public class Main {
     public static void main(String[] args) {
         SaveLoad system = new SaveLoad();
         String input = system.Load();
         RushHourGame game = new RushHourGame(input);
+        int algorithm;
+        int heuristic;
 
-        AStarSolver solver = new AStarSolver(game);
+        Scanner scanner = new Scanner(System.in);
+
+        // Main program
+        while (true) { 
+            System.out.println("===== Choose algorithm =====");
+            System.out.println(" 1. Uniform Cost Search");
+            System.out.println(" 2. Greedy Best First Search");
+            System.out.println(" 3. A* Algorithm");
+
+            System.out.print("Your choice (number): ");
+            algorithm = scanner.nextInt();
+            scanner.nextLine();
+            if (algorithm > 3 || algorithm < 1) {
+                System.out.println();
+                continue;
+            }
+
+            System.out.println("===== Choose heuristic =====");
+            System.out.println(" 1. Heuristic A");
+            System.out.println(" 2. Heuristic B");
+            System.out.println(" 3. Heuristic C");
+            System.out.print("Your choice (number): ");
+            heuristic = scanner.nextInt();
+            scanner.nextLine();
+            if (heuristic > 3 || heuristic < 1) {
+                System.out.println();
+                continue;
+            }
+            break;
+        }
+
         game.displayBoard();
-        long startTime = System.currentTimeMillis();
-        List<State> result = solver.solve();
-        long endTime = System.currentTimeMillis();
-        int steps = solver.displaySolution(result);
+
+        // solve game based on heuristic
+        game.solveGame(algorithm, heuristic);
 
         // ouput file
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Masukkan path folder: ");
+        System.out.println("Masukkan output filename (without .txt): ");
         String filePath = scanner.nextLine();
 
         // Output ke console
-        if (result != null) {
-            System.out.println("Total steps : " + steps);
-            System.out.println("Total nodes explored: " + solver.getNodeCount());
-            System.out.println("Solution found in " + (endTime - startTime) + " ms");
+        if (game.solution != null) {
+            System.out.println("Total steps : " + game.steps);
+            System.out.println("Total nodes explored: " + game.nodes);
+            System.out.println("Solution found in " + (game.endTime - game.startTime) + " ms");
             
             // Output ke file
             String outputFilename = "test/" + filePath + ".txt";
             Algorithm.writeSolutionToFile(
                 outputFilename, 
-                result, 
-                steps, 
-                solver.getNodeCount(), 
-                (endTime - startTime)
+                game.solution, 
+                game.steps, 
+                game.nodes, 
+                (game.endTime - game.startTime)
             );
             System.out.println("Solution saved in " + outputFilename);
         } else {
             System.out.println("No solution found.");
         }
+
+        scanner.close();
     }
 }
