@@ -1,0 +1,56 @@
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.button-start {
+    -fx-font-size: 16px;
+    -fx-background-color: #ffe600;
+    -fx-text-fill: rgb(0, 0, 0);
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75), 8, 0.5, 2, 2);
+}
+
+.button:hover {
+    -fx-background-color: #d6b317;
+}
+
+.landing {
+    -fx-padding: 50;
+}
+
+.credit {
+    -fx-font-size: 12px;
+    -fx-text-fill: #ffffff;
+    -fx-font-style: italic;
+    -fx-padding: 5 10 5 10;
+    -fx-alignment: center;
+}
+
+.intro {
+    -fx-font-size: 13px;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-padding: 5 5 5 5;
+    -fx-alignment: center;
+    -fx-text-alignment: center;  
+}
+
+.game-header {
+    -fx-text-fill: black;
+    -fx-font-size: 16px;   
+    -fx-font-weight: bold;
+    -fx-font-family: "Verdana", "Arial Black", sans-serif;
+    -fx-alignment: center;
+}
+
+.stats-bar {
+    -fx-padding: 10px 20px;                  /* Top/bottom and left/right padding */
+    -fx-spacing: 30px;                       /* Space between stats */
+    -fx-alignment: center-left;              /* Align stats to the left */
+    -fx-border-color: #6a0000;             /* Subtle white border */
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
