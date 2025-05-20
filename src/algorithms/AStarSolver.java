@@ -6,9 +6,12 @@ import utils.State;
 
 public class AStarSolver extends Algorithm {
     private int nodeCount = 0;
-    public AStarSolver(RushHourGame game) {
+    private int heuristic = 1;
+
+    public AStarSolver(RushHourGame game, int heu) {
         super(game);
         this.nodeCount = 0;
+        this.heuristic = heu;
     }
 
     public List<State> solve() {
@@ -19,8 +22,8 @@ public class AStarSolver extends Algorithm {
         
         // sesuain nanti opsinya
         PriorityQueue<State> openSet = new PriorityQueue<>((s1, s2) -> {
-            int f1 = s1.getCost() + Heuristic.calculateHeuristicAstar(s1, game, 2);
-            int f2 = s2.getCost() + Heuristic.calculateHeuristicAstar(s2, game, 2);
+            int f1 = s1.getCost() + Heuristic.calculateHeuristicAstar(s1, game, heuristic);
+            int f2 = s2.getCost() + Heuristic.calculateHeuristicAstar(s2, game, heuristic);
             return Integer.compare(f1, f2);
         });
         

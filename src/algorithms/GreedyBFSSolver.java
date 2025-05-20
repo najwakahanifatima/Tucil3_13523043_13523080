@@ -6,14 +6,17 @@ import utils.State;
 
 public class GreedyBFSSolver extends Algorithm {
     private int nodeCount = 0;
-    public GreedyBFSSolver(RushHourGame game) {
+    private int heuristic = 1;
+
+    public GreedyBFSSolver(RushHourGame game, int heu) {
         super(game);
         this.nodeCount = 0;
+        this.heuristic = heu;
     }
 
     public List<State> solve() {
         nodeCount = 0;
-        PriorityQueue<State> unexplored = new PriorityQueue<>(Comparator.comparingInt(s -> Heuristic.calculateHeuristicGreedy(s, game, 1)));
+        PriorityQueue<State> unexplored = new PriorityQueue<>(Comparator.comparingInt(s -> Heuristic.calculateHeuristicGreedy(s, game, heuristic)));
         Set<String> explored = new HashSet<>();
 
         State start = new State(cloneVehicleMap(game.getVehicles()), 0, null, "");
@@ -33,7 +36,7 @@ public class GreedyBFSSolver extends Algorithm {
             }
 
             List<State> neighbours = getNeighbours(current);
-            neighbours.sort(Comparator.comparingInt(s -> Heuristic.calculateHeuristicGreedy(s, game, 1)));
+            neighbours.sort(Comparator.comparingInt(s -> Heuristic.calculateHeuristicGreedy(s, game, heuristic)));
             unexplored.addAll(neighbours);
 
             // debugUnexplored(unexplored);
