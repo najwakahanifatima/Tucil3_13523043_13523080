@@ -3,6 +3,7 @@ package gui;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import utils.RushHourGame;
 
 public class MainApp extends Application {
     private Stage primaryStage;
@@ -21,9 +22,17 @@ public class MainApp extends Application {
         primaryStage.show();
     }
 
-    public void showMainPage() {
-        MainPage mainPage = new MainPage(this);
-        Scene scene = new Scene(mainPage.getLayout(), 600, 400);
+    public void showMainBoard(RushHourGame game) {
+        MainBoardPage mainBoard = new MainBoardPage(game);
+        Scene scene = new Scene(mainBoard.getLayout(), 600, 400);
+        primaryStage.setTitle("Game Page");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public void showBoardConfigPage() {
+        BoardConfig boardConfig = new BoardConfig(this);
+        Scene scene = new Scene(boardConfig.getLayout(), 600, 400);
         primaryStage.setTitle("Main Page");
         primaryStage.setScene(scene);
     }
@@ -34,7 +43,7 @@ public class MainApp extends Application {
         primaryStage.setScene(scene);
     }
 
-    public void goToBoard(Block[] blocks, int rows, int cols) {
+    public void goToBoard(Block[] blocks, int rows, int cols, String exitConf, int exitPos) {
         // debug
         int i = 0;
         for (Block b : blocks){
@@ -42,7 +51,7 @@ public class MainApp extends Application {
             i++;
         }
 
-        BoardPage boardPage = new BoardPage(blocks, rows, cols);
+        BoardPage boardPage = new BoardPage(blocks, rows, cols, exitConf, exitPos);
         Scene scene = new Scene(boardPage.getLayout(), 600, 400);
         primaryStage.setScene(scene);
     }

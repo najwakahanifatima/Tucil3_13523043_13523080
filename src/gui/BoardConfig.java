@@ -1,4 +1,4 @@
-package gui;
+ package gui;
 
 import javafx.TextField;
 import javafx.geometry.Pos;
@@ -6,10 +6,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class MainPage {
+public class BoardConfig {
     private VBox layout;
 
-    public MainPage(MainApp app) {
+    public BoardConfig(MainApp app) {
         Label labelRow = new Label("Enter number of rows:");
         Label labelCol = new Label("Enter number of cols:");
         TextField inputRows = new TextField();
@@ -20,7 +20,7 @@ public class MainPage {
         TextField inputRowExit = new TextField();
         TextField inputColExit = new TextField();
 
-        Label labelNumOfBlocks = new Label("Enter number of blocks:");
+        Label labelNumOfBlocks = new Label("Enter number of blocks (except main block):");
         TextField inputNumOfBlocks = new TextField();
         inputNumOfBlocks.setPromptText("e.g., 3");
         Button nextButton = new Button("Next");
@@ -34,7 +34,7 @@ public class MainPage {
                 if (numBlocks <= 0 || numBlocks >= 25) throw new NumberFormatException();
                 app.goToBlockConfig(numBlocks, rows, cols);
             } catch (NumberFormatException ex) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter a number between 1 and 24.");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter a valid number of blocks.");
                 alert.showAndWait();
             }
         });

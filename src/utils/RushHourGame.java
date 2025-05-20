@@ -19,11 +19,12 @@ public class RushHourGame {
     }
 
     private void parseInput(String input) {
-        String[] lines = input.split("\n");
-        String[] dimensions = lines[0].split(" ");
+        String[] lines = input.split("\\r?\\n"); // Support Windows + Unix line endings
+        String[] dimensions = lines[0].trim().split("\\s+");
         int specifiedRows = Integer.parseInt(dimensions[0]);
         int specifiedCols = Integer.parseInt(dimensions[1]);
-        numVehicles = Integer.parseInt(lines[1]);
+        numVehicles = Integer.parseInt(lines[1].trim());
+
         
         // menentukan dimensi board sesuai dengan letak K
         int actualRows = specifiedRows;
@@ -132,6 +133,18 @@ public class RushHourGame {
 
     public Map<Character, Vehicle> vehicles() {
         return vehicles;
+    }
+
+    public int getCols(){
+        return cols;
+    }
+    
+    public int getRows(){
+        return rows;
+    }
+
+    public char getChar(int row, int col) {
+        return board[row][col];
     }
     
 }
