@@ -242,9 +242,16 @@ public class MainBoardPage {
         Timeline timeline = new Timeline();
         timeline.setCycleCount(1);
 
+        double dur;
+        if (path.size() < 40) {
+            dur = 0.5;
+        } else {
+            dur = 0.2;
+        }
+
         for (int i = 0; i < path.size(); i++) {
             final int index = i;
-            KeyFrame frame = new KeyFrame(Duration.seconds(index * 0.5), e -> {
+            KeyFrame frame = new KeyFrame(Duration.seconds(index * dur), e -> {
                 char[][] board = generateBoardFromState(path.get(index));
                 layout.setCenter(buildGridFromCharBoard(board));
             });
