@@ -5,12 +5,14 @@ import utils.RushHourGame;
 import utils.State;
 
 public class AStarSolver extends Algorithm {
-
+    private int nodeCount = 0;
     public AStarSolver(RushHourGame game) {
         super(game);
+        this.nodeCount = 0;
     }
 
     public List<State> solve() {
+        nodeCount = 0;
         Map<String, Integer> gScores = new HashMap<>();
         
         // priority queue with f(n) = g(n) + h(n) ordering
@@ -34,7 +36,10 @@ public class AStarSolver extends Algorithm {
             State currentState = openSet.poll();
             String currentStateKey = currentState.getStateString();
             
+           
+
             if (isGoal(currentState, game)) {
+                System.out.println("Total nodes explored: " + nodeCount);
                 return constructPath(currentState);
             }
             
@@ -42,6 +47,7 @@ public class AStarSolver extends Algorithm {
             if (closedSet.contains(currentStateKey)) {
                 continue;
             }
+            nodeCount++;
             
             // mark as processed
             closedSet.add(currentStateKey);
@@ -69,7 +75,11 @@ public class AStarSolver extends Algorithm {
                 }
             }
         }
-        
+        System.out.println("Total nodes explored: " + nodeCount);
         return null;
     }
+
+    public int getNodeCount() {
+        return nodeCount;
+    }   
 }

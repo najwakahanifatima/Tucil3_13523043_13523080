@@ -1,5 +1,5 @@
 
-import algorithms.UCSSolver;
+import algorithms.GreedyBFSSolver;
 import java.util.List;
 import utils.RushHourGame;
 import utils.SaveLoad;
@@ -11,8 +11,18 @@ public class Main {
         String input = system.Load();
         RushHourGame game = new RushHourGame(input);
 
-        UCSSolver solver = new UCSSolver(game);
+        GreedyBFSSolver solver = new GreedyBFSSolver(game);
+        long startTime = System.currentTimeMillis();
         List<State> result = solver.solve();
+        long endTime = System.currentTimeMillis();
         solver.displaySolution(result);
+
+        // output 
+        if (result != null) {
+            System.out.println("Solution found in " + (endTime - startTime) + " ms");
+            System.out.println("Total nodes explored: " + solver.getNodeCount());
+        } else {
+            System.out.println("No solution found.");
+        }
     }
 }

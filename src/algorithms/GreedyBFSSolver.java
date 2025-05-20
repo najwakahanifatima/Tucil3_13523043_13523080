@@ -5,13 +5,14 @@ import utils.RushHourGame;
 import utils.State;
 
 public class GreedyBFSSolver extends Algorithm {
-
+    private int nodeCount = 0;
     public GreedyBFSSolver(RushHourGame game) {
         super(game);
+        this.nodeCount = 0;
     }
 
     public List<State> solve() {
-
+        nodeCount = 0;
         PriorityQueue<State> unexplored = new PriorityQueue<>(Comparator.comparingInt(s -> Heuristic.calculateHeuristicGreedy(s, game, 1)));
         Set<String> explored = new HashSet<>();
 
@@ -24,8 +25,10 @@ public class GreedyBFSSolver extends Algorithm {
 
             if (explored.contains(stateString)) continue;
             explored.add(stateString);
+            nodeCount++;
 
             if (isGoal(current, game)) {
+                System.out.println("Total nodes explored: " + nodeCount);
                 return constructPath(current);
             }
 
@@ -35,7 +38,11 @@ public class GreedyBFSSolver extends Algorithm {
 
             // debugUnexplored(unexplored);
         }
-
+        System.out.println("Total nodes explored: " + nodeCount);
         return null;
+    }
+
+    public int getNodeCount() {
+        return nodeCount;
     }
 }
