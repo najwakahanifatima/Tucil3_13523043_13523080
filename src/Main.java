@@ -10,8 +10,6 @@ public class Main {
         SaveLoad system = new SaveLoad();
         String input = system.Load();
         RushHourGame game = new RushHourGame(input);
-        game.displayBoard();
-        System.out.println(game.getExitPosition().getRow() + " " + game.getExitPosition().getCol());
 
         UCSSolver solver = new UCSSolver(game);
         List<State> result = solver.solve();

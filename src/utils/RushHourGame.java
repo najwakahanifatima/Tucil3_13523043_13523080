@@ -216,25 +216,6 @@ public class RushHourGame {
     }
 
 
-    boolean canMove(Vehicle vehicle, int direction) {
-        if (vehicle.isHorizontal()) {
-            if (direction < 0) { // left
-                int newCol = vehicle.getCol() - 1;
-                return newCol >= 0 && board[vehicle.getRow()][newCol] == '.';
-            } else { // right
-                int newCol = vehicle.getCol() + vehicle.getLength();
-                return newCol < cols && board[vehicle.getRow()][newCol] == '.';
-            }
-        } else {
-            if (direction < 0) { // up
-                int newRow = vehicle.getRow() - 1;
-                return newRow >= 0 && board[newRow][vehicle.getCol()] == '.';
-            } else { // down
-                int newRow = vehicle.getRow() + vehicle.getLength();
-                return newRow < rows && board[newRow][vehicle.getCol()] == '.';
-            }
-        }
-    }
 
     private char lastMovedVehicle = '\0';  // menyimpan ID kendaraan terakhir yang bergerak
 
