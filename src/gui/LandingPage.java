@@ -3,26 +3,48 @@ package gui;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.List;
 
-import algorithms.UCSSolver;
+import javafx.scene.control.Label;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import utils.RushHourGame;
-import utils.State;
-
 public class LandingPage {
     private VBox layout;
 
     public LandingPage(MainApp app) {
 
-        Button startButtonManual = new Button("Start Manual");
-        startButtonManual.setOnAction(e -> app.showBoardConfigPage());
+        // Button startButtonManual = new Button("Start Manual");
+        // startButtonManual.setOnAction(e -> app.showBoardConfigPage());
 
+        layout = new VBox(20);
+
+        // set bg
+        Image bgImage = new Image(getClass().getResource("bg.png").toExternalForm());
+
+        BackgroundImage backgroundImage = new BackgroundImage(
+            bgImage,
+            BackgroundRepeat.NO_REPEAT,
+            BackgroundRepeat.NO_REPEAT,
+            BackgroundPosition.CENTER,
+            new BackgroundSize(100, 100, true, true, true, false)
+        );
+        layout.setBackground(new Background(backgroundImage));
+        layout.setPrefSize(600, 600);
+
+        // set button
+        Label intro = new Label("Upload your configuration!");
         Button startButtonUpload = new Button("Start Upload");
+
         startButtonUpload.setOnAction(e -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Upload Puzzle File");
@@ -54,13 +76,17 @@ public class LandingPage {
             }
         });
 
-        layout = new VBox(20);
-        layout.setAlignment(Pos.CENTER);
-        layout.getChildren().add(startButtonManual);
-        layout.getChildren().add(startButtonUpload);
+        Label credit = new Label("This program is made by Najwa K. F. (13523043) and Diyah S. N. (13523080)");
 
-        System.out.println("CSS path = " + getClass().getResource("style.css"));
-        layout.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        layout.setAlignment(Pos.CENTER);
+        // layout.getChildren().add(startButtonManual);
+        layout.getChildren().add(intro);
+        layout.getChildren().add(startButtonUpload);
+        layout.getChildren().add(credit);
+
+        credit.getStyleClass().add("credit");
+        intro.getStyleClass().add("intro");
+        startButtonUpload.getStyleClass().add("button-start");
         layout.getStyleClass().add("landing");
     }
 

@@ -16,7 +16,8 @@ public class MainApp extends Application {
 
     public void showLandingPage() {
         LandingPage landingPage = new LandingPage(this);
-        Scene scene = new Scene(landingPage.getLayout(), 600, 400);
+        Scene scene = new Scene(landingPage.getLayout(), 600, 600);
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         primaryStage.setTitle("Landing Page");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -24,7 +25,8 @@ public class MainApp extends Application {
 
     public void showMainBoard(RushHourGame game) {
         MainBoardPage mainBoard = new MainBoardPage(game);
-        Scene scene = new Scene(mainBoard.getLayout(), 600, 400);
+        Scene scene = new Scene(mainBoard.getLayout(), 600, 600);
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         primaryStage.setTitle("Game Page");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -32,14 +34,14 @@ public class MainApp extends Application {
 
     public void showBoardConfigPage() {
         BoardConfig boardConfig = new BoardConfig(this);
-        Scene scene = new Scene(boardConfig.getLayout(), 600, 400);
+        Scene scene = new Scene(boardConfig.getLayout(), 600, 600);
         primaryStage.setTitle("Main Page");
         primaryStage.setScene(scene);
     }
 
     public void goToBlockConfig(int numberOfBlocks, int rows, int cols) {
         BlockConfigPage configPage = new BlockConfigPage(this, numberOfBlocks, rows, cols);
-        Scene scene = new Scene(configPage.getLayout(), 600, 400);
+        Scene scene = new Scene(configPage.getLayout(), 600, 600);
         primaryStage.setScene(scene);
     }
 
@@ -52,7 +54,7 @@ public class MainApp extends Application {
         }
 
         BoardPage boardPage = new BoardPage(blocks, rows, cols, exitConf, exitPos);
-        Scene scene = new Scene(boardPage.getLayout(), 600, 400);
+        Scene scene = new Scene(boardPage.getLayout(), 600, 600);
         primaryStage.setScene(scene);
     }
 
