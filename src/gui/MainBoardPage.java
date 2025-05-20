@@ -43,7 +43,7 @@ public class MainBoardPage {
     private String chosenAlgorithm = algorithms.get(0);
     private String chosenHeuristic = heuristics.get(0);
 
-    public MainBoardPage(RushHourGame game) {
+    public MainBoardPage(RushHourGame game, MainApp app) {
         this.game = game;
         layout = new BorderPane();
 
@@ -51,8 +51,13 @@ public class MainBoardPage {
         Label lblDuration = new Label("Duration: -");
         Label lblSteps = new Label("Steps: -");
         Label lblNodes = new Label("Nodes: -");
+        Button backButton = new Button("Back or Upload");
 
-        HBox statsBox = new HBox(15, lblDuration, lblSteps, lblNodes);
+        backButton.setOnAction(e -> {
+            app.showLandingPage();
+        });
+
+        HBox statsBox = new HBox(15, lblDuration, lblSteps, lblNodes, backButton);
         statsBox.setAlignment(Pos.CENTER);
         layout.setBottom(statsBox);
         statsBox.getStyleClass().add("stats-bar");

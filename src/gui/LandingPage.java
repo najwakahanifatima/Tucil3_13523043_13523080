@@ -23,13 +23,10 @@ public class LandingPage {
 
     public LandingPage(MainApp app) {
 
-        // Button startButtonManual = new Button("Start Manual");
-        // startButtonManual.setOnAction(e -> app.showBoardConfigPage());
-
         layout = new VBox(20);
 
         // set bg
-        Image bgImage = new Image(getClass().getResource("bg.png").toExternalForm());
+        Image bgImage = new Image(getClass().getResource("/gui/bg.png").toExternalForm());
 
         BackgroundImage backgroundImage = new BackgroundImage(
             bgImage,
@@ -42,7 +39,7 @@ public class LandingPage {
         layout.setPrefSize(600, 600);
 
         // set button
-        Label intro = new Label("Upload your configuration!");
+        Label intro = new Label("Up load your configuration!");
         Button startButtonUpload = new Button("Start Upload");
 
         startButtonUpload.setOnAction(e -> {
