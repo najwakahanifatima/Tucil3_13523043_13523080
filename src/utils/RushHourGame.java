@@ -41,49 +41,100 @@ public class RushHourGame {
         this.exitPosition = new Position(other.exitPosition);
     }
 
-private void parseInput(String input) {
-    String[] lines = input.split("\n");
-    String[] dimensions = lines[0].trim().split(" ");
-    rows = Integer.parseInt(dimensions[0]);
-    cols = Integer.parseInt(dimensions[1]);
-    numVehicles = Integer.parseInt(lines[1].trim());
-    
-    board = new char[rows][cols];
-    for (char[] row : board) {
-        Arrays.fill(row, ' ');
-    }
-
-    for (int i = 0; i < lines.length - 2; i++) { 
-        String line = lines[i + 2];
-        int boardCol = 0;
+    private void parseInput(String input) {
+        String[] lines = input.split("\n");
+        String[] dimensions = lines[0].trim().split(" ");
+        rows = Integer.parseInt(dimensions[0]);
+        cols = Integer.parseInt(dimensions[1]);
+        numVehicles = Integer.parseInt(lines[1].trim());
         
-        for (int j = 0; j < line.length(); j++) {
-            char c = line.charAt(j);
+        board = new char[rows][cols];
+        for (char[] row : board) {
+            Arrays.fill(row, ' ');
+        }
 
-            if (c == 'K') {
-                if (i == rows) { // bawah
-                    System.out.println("bawah");
-                    exitPosition = new Position(rows, j); 
-                } else if (j == 0) { // Kiri
-                    System.out.println("kiri");
-                    exitPosition = new Position(i, -1);
-                } else if (i == 0) { // Atas
-                    System.out.println("atas");
+        
+        // cek baris di atas papan 
+        if (lines.length > 2) {
+            String topLine = lines[2];
+            for (int j = 0; j < topLine.length(); j++) {
+                if (topLine.charAt(j) == 'K') {
+                    // K di atas papan
                     exitPosition = new Position(-1, j);
-                } else if (j == line.length() - 1) { // Kanan
-                    System.out.println("kanan");
-                    exitPosition = new Position(i, cols);
-                }
-            } else if ((c >= 'A' && c <= 'Z') || c == '.') {
-                if (i < rows && boardCol < cols) {
-                    board[i][boardCol++] = c;
+                    System.out.println("K ditemukan di atas papan: exitPosition=-1," + j);
+                    break;
                 }
             }
         }
+        
+        // cek baris di bawah papan 
+        if (lines.length > rows + 2) {
+            String bottomLine = lines[rows + 2];
+            for (int j = 0; j < bottomLine.length(); j++) {
+                if (bottomLine.charAt(j) == 'K') {
+                    // K di bawah papan 
+                    exitPosition = new Position(rows, j);
+                    System.out.println("K ditemukan di bawah papan: exitPosition=" + rows + "," + j);
+                    break;
+                }
+            }
+        }
+        
+        // isi papan dengan karakter non-K
+        int boardStartLine = 0;
+        
+        if (lines.length > 2 && lines[2].contains("K")) {
+            boardStartLine = 1; 
+        }
+        
+        for (int i = 0; i < rows; i++) {
+            int lineIndex = i + boardStartLine + 2; 
+            if (lineIndex >= lines.length) break;
+            
+            String line = lines[lineIndex];
+            int boardCol = 0;
+            
+            for (int j = 0; j < line.length(); j++) {
+                char c = line.charAt(j);
+                if (c == ' ') continue;
+                
+                if (c == 'K') continue;
+                
+                if ((c >= 'A' && c <= 'Z') || c == '.') {
+                    if (boardCol < cols) {
+                        board[i][boardCol++] = c;
+                    }
+                }
+            }
+            
+            // K di kiri dan kanan
+            if (line.length() > 0 && line.charAt(0) == 'K') {
+                exitPosition = new Position(i, -1);
+                System.out.println("K ditemukan di sisi kiri: exitPosition=" + i + ",-1");
+            }
+            
+            if (boardCol == cols && line.length() > cols && line.charAt(cols) == 'K') {
+                exitPosition = new Position(i, cols);
+                System.out.println("K ditemukan di sisi kanan: exitPosition=" + i + "," + cols);
+            }
+        }
+        
+        int lastBoardRow = Math.min(rows - 1, lines.length - 3);
+        if (lastBoardRow >= 0) {
+            String lastLine = lines[lastBoardRow + 2];
+            for (int j = 0; j < lastLine.length(); j++) {
+                if (lastLine.charAt(j) == 'K' && (j >= cols || j == lastLine.length() - 1)) {
+                    exitPosition = new Position(lastBoardRow, cols);
+                    System.out.println("K ditemukan di sisi kanan terakhir: exitPosition=" + lastBoardRow + "," + cols);
+                    break;
+                }
+            }
+        }
+        
+        if (exitPosition == null) {
+            throw new IllegalArgumentException("Pintu keluar (K) tidak ditemukan dalam input");
+        }
     }
-
-    // displayBoard();
-}
 
     private void identifyVehicles() {
     vehicles = new HashMap<>();
@@ -164,51 +215,6 @@ private void parseInput(String input) {
         System.out.println();
     }
 
-    // heuristic
-    public int blockingHeuristic() {
-        // cari posisi kendaraan target
-        Vehicle target = targetVehicle;
-        int blockingCount = 0;
-        
-        // asumsikan kendaraan target horizontal dan exit di sebelah kanan
-        if (target.isHorizontal()) {
-            int row = target.getRow();
-            int endCol = target.getCol() + target.getLength() - 1;
-
-            for (int col = endCol + 1; col < cols; col++) {
-                if (board[row][col] != '.') {
-                    blockingCount++;
-                }
-            }
-        }
-        // jika vertikal, perlu disesuaikan
-        else {
-            int col = target.getCol();
-            int endRow = target.getRow() + target.getLength() - 1;
-            
-            for (int row = endRow + 1; row < rows; row++) {
-                if (board[row][col] != '.') {
-                    blockingCount++;
-                }
-            }
-        }
-        
-        return blockingCount;
-    }
-
-    public boolean isSolved() {
-        Vehicle target = targetVehicle;
-        if (target.isHorizontal()) {
-            int headCol = target.getCol() + target.getLength() - 1;
-
-            return headCol + 1 == exitPosition.getCol() && target.getRow() == exitPosition.getRow();
-        } else {
-            int headRow = target.getRow() + target.getLength() - 1;
-
-            return headRow + 1 == exitPosition.getRow() && target.getCol() == exitPosition.getCol();
-        }
-    }
-
 
     boolean canMove(Vehicle vehicle, int direction) {
         if (vehicle.isHorizontal()) {
@@ -273,48 +279,6 @@ private void parseInput(String input) {
         if (vehicleId == 'P') {
             targetVehicle = new Vehicle(vehicle);
         }
-    }
-
-
-    public int calculateHeuristic() {
-        return blockingHeuristic() + distanceToExit();
-    }
-
-    private int distanceToExit() {
-        Vehicle target = targetVehicle;
-        if (target.isHorizontal()) {
-            int endCol = target.getCol() + target.getLength() - 1;
-            return exitPosition.getCol() - endCol;
-        } else {
-            int endRow = target.getRow() + target.getLength() - 1;
-            return exitPosition.getRow() - endRow;
-        }
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof RushHourGame)) return false;
-        RushHourGame other = (RushHourGame) obj;
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (board[i][j] != other.board[i][j]) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = 0;
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                result = 31 * result + board[i][j];
-            }
-        }
-        return result;
     }
     
 }

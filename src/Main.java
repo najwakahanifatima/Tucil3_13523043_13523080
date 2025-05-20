@@ -1,5 +1,5 @@
 
-import algorithms.AStarSolver;
+import algorithms.UCSSolver;
 import java.util.List;
 import utils.RushHourGame;
 import utils.SaveLoad;
@@ -13,7 +13,7 @@ public class Main {
         game.displayBoard();
         System.out.println(game.getExitPosition().getRow() + " " + game.getExitPosition().getCol());
 
-        AStarSolver solver = new AStarSolver(game);
+        UCSSolver solver = new UCSSolver(game);
         List<State> result = solver.solve();
         solver.displaySolution(result);
     }

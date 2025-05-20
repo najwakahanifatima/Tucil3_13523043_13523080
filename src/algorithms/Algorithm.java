@@ -75,38 +75,56 @@ public class Algorithm {
     }
 
 
-    protected boolean canExitVertical(Vehicle target, Position exit, Map<Character, Vehicle> vehicles) {
-        int col = target.getCol();
-        int startRow, endRow;
+protected boolean canExitVertical(Vehicle target, Position exit, Map<Character, Vehicle> vehicles) {
+    int col = target.getCol();
+    int startRow, endRow;
 
-        if (exit.getRow() < target.getRow()) {
-            // exit is on the top side
-            startRow = exit.getRow() + 1;
-            endRow = target.getRow() - 1;
-        } else {
-            // exit is on the bottom side
-            startRow = target.getRow() + target.getLength();
-            endRow = exit.getRow();
+    if (exit.getRow() < target.getRow()) {
+        // exit is on the top side
+        startRow = exit.getRow() + 1;
+        endRow = target.getRow() - 1;
+        
+        // Khusus untuk kasus pintu keluar di atas dan kendaraan di baris 0
+        if (target.getRow() == 0) {
+            // Kendaraan sudah di baris paling atas, langsung cek apakah kendaraan target
+            // bisa bergerak keluar (tidak ada yang menghalangi di sepanjang lintasan keluar)
+            if (exit.getRow() == -1 && exit.getCol() == col) {
+                // Pastikan pintu keluar sejajar dengan kendaraan
+                return true;
+            } else {
+                return false;
+            }
         }
+    } else {
+        // exit is on the bottom side
+        startRow = target.getRow() + target.getLength();
+        endRow = exit.getRow();
+    }
 
-        for (int row = startRow; row <= endRow; row++) {
-            for (Vehicle v : vehicles.values()) {
-                if (v.getId() == target.getId()) continue;
+    // Jika interval invalid (startRow > endRow), langsung kembalikan false
+    if (startRow > endRow) {
+        return false;
+    }
 
-                if (v.isHorizontal()) {
-                    if (row == v.getRow() && col >= v.getCol() && col < v.getCol() + v.getLength()) {
-                        return false;
-                    }
-                } else {
-                    if (col == v.getCol() && row >= v.getRow() && row < v.getRow() + v.getLength()) {
-                        return false;
-                    }
+    // Periksa apakah ada kendaraan lain menghalangi jalur keluar
+    for (int row = startRow; row <= endRow; row++) {
+        for (Vehicle v : vehicles.values()) {
+            if (v.getId() == target.getId()) continue;
+
+            if (v.isHorizontal()) {
+                if (row == v.getRow() && col >= v.getCol() && col < v.getCol() + v.getLength()) {
+                    return false;
+                }
+            } else {
+                if (col == v.getCol() && row >= v.getRow() && row < v.getRow() + v.getLength()) {
+                    return false;
                 }
             }
         }
-
-        return true;
     }
+
+    return true;
+}
 
 
     protected List<State> getNeighbours(State state) {
