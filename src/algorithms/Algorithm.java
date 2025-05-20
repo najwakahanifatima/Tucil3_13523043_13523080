@@ -201,96 +201,125 @@ protected boolean canExitVertical(Vehicle target, Position exit, Map<Character, 
         return path;
     }
 
-    public void displaySolution(List<State> path) {
+    public int displaySolution(List<State> path) {
+        if (path == null || path.isEmpty()) return 0;
+
         int step = 0;
-        for (State state : path) {
-            System.out.println("Step " + step++);
-            char vehicleId = '-'; //dummy
-            if (state.move != null && !state.move.isEmpty()) {
-                vehicleId = state.move.charAt(0);
-                System.out.println("Move: " + state.move);
-            } else {
-                System.out.println("Initial state");
+        System.out.println("Step " + step++ + " - Initial state");
+        printBoard(path.get(0).vehicles, '-');
+        System.out.println("------------------------");
+
+        if (path.size() == 1) return 0;
+
+        char currentVehicle = '-';
+        State lastState = path.get(0);
+        String lastMove = "";
+
+        for (int i = 1; i < path.size(); i++) {
+            State state = path.get(i);
+            char vehicle = state.move.charAt(0);
+            
+            if (vehicle != currentVehicle) {
+                // cetak gerakan sebelumnya jika ada
+                if (!lastMove.isEmpty()) {
+                    System.out.println("Step " + step++);
+                    System.out.println("Move: " + lastMove);
+                    printBoard(lastState.vehicles, currentVehicle);
+                    System.out.println("------------------------");
+                }
+                currentVehicle = vehicle;
             }
             
-            printBoard(state.vehicles, vehicleId);
+            lastState = state;
+            lastMove = state.move;
+        }
+
+        // cetak gerakan terakhir
+        if (!lastMove.isEmpty()) {
+            System.out.println("Step " + step);
+            System.out.println("Move: " + lastMove);
+            printBoard(lastState.vehicles, currentVehicle);
             System.out.println("------------------------");
         }
+
+        return step;
     }
 
     protected void printBoard(Map<Character, Vehicle> vehicles, char id) {
-    int rows = game.getBoard().length;
-    int cols = game.getBoard()[0].length;
-    char[][] board = new char[rows][cols];
+        int rows = game.getBoard().length;
+        int cols = game.getBoard()[0].length;
+        char[][] board = new char[rows][cols];
 
-    // Inisialisasi papan kosong
-    for (int i = 0; i < rows; i++) {
-        Arrays.fill(board[i], '.');
-    }
+        for (int i = 0; i < rows; i++) {
+            Arrays.fill(board[i], '.');
+        }
 
-    // Tempatkan kendaraan di papan
-    for (Vehicle v : vehicles.values()) {
-        for (int i = 0; i < v.getLength(); i++) {
-            int r = v.getRow() + (v.isHorizontal() ? 0 : i);
-            int c = v.getCol() + (v.isHorizontal() ? i : 0);
-            if (r >= 0 && r < rows && c >= 0 && c < cols) {  // Pastikan dalam batas papan
-                board[r][c] = v.getId();
+        for (Vehicle v : vehicles.values()) {
+            for (int i = 0; i < v.getLength(); i++) {
+                int r = v.getRow() + (v.isHorizontal() ? 0 : i);
+                int c = v.getCol() + (v.isHorizontal() ? i : 0);
+                if (r >= 0 && r < rows && c >= 0 && c < cols) {  
+                    board[r][c] = v.getId();
+                }
             }
         }
-    }
 
-    Position exit = game.getExitPosition();
+        Position exit = game.getExitPosition();
 
-    // Cetak 'K' di luar papan jika exit position negatif
-    if (exit.getRow() == -1) { // exit di atas papan
-        for (int j = 0; j < exit.getCol(); j++) {
-            System.out.print("  ");
+        // cetak 'K' di luar papan jika exit position negatif
+        if (exit.getRow() == -1) { // exit di atas papan
+            for (int j = 0; j < exit.getCol(); j++) {
+                System.out.print("  ");
+            }
+            System.out.println(ANSI_GREEN + "K" + ANSI_RESET + " ");
+        } else if (exit.getCol() == -1) { // exit di kiri papan
+            // System.out.print(ANSI_GREEN + "K" + ANSI_RESET + " ");
         }
-        System.out.println("K");
-    } else if (exit.getCol() == -1) { // exit di kiri papan
-        System.out.print(ANSI_GREEN + "K" + ANSI_RESET + " ");
-    }
 
-    // Cetak papan
-    for (int i = 0; i < rows; i++) {
-        // Cetak 'K' di kiri jika exit di baris ini
-        if (exit.getCol() == -1 && i == exit.getRow()) {
-            System.out.print(ANSI_GREEN + "K" + ANSI_RESET + " ");
-        }
-        
-        for (int j = 0; j < cols; j++) {
-            // Cetak 'K' di dalam papan jika posisi exit valid
-            if (i == exit.getRow() && j == exit.getCol() && 
-                exit.getRow() >= 0 && exit.getCol() >= 0) {
+        // cetak papan
+        for (int i = 0; i < rows; i++) {
+            //  'K' di kiri jika exit di baris ini
+            if (exit.getCol() == -1 && i == exit.getRow()) {
                 System.out.print(ANSI_GREEN + "K" + ANSI_RESET + " ");
-                continue;
+            }
+            else if(exit.getCol() == -1) { //iya?
+                System.out.print("  ");
+                
             }
             
-            // Cetak kendaraan dengan warna
-            if (board[i][j] == id) {
-                System.out.print(ANSI_YELLOW + board[i][j] + ANSI_RESET + " ");
-            } else if (board[i][j] == 'P') {
-                System.out.print(ANSI_RED + board[i][j] + ANSI_RESET + " ");
-            } else {
-                System.out.print(board[i][j] + " ");
+            for (int j = 0; j < cols; j++) {
+                //  'K' di dalam papan jika posisi exit valid
+                if (i == exit.getRow() && j == exit.getCol() && 
+                    exit.getRow() >= 0 && exit.getCol() >= 0) {
+                    System.out.print(ANSI_GREEN + "K" + ANSI_RESET + " ");
+                    continue;
+                }
+                
+                // Cetak kendaraan dengan warna
+                if (board[i][j] == id) {
+                    System.out.print(ANSI_YELLOW + board[i][j] + ANSI_RESET + " ");
+                } else if (board[i][j] == 'P') {
+                    System.out.print(ANSI_RED + board[i][j] + ANSI_RESET + " ");
+                } else {
+                    System.out.print(board[i][j] + " ");
+                }
             }
+            
+            //  'K' di kanan jika exit di baris ini
+            if (exit.getCol() == cols && i == exit.getRow()) {
+                System.out.print(ANSI_GREEN + "K" + ANSI_RESET + " ");
+            }
+            System.out.println();
         }
-        
-        // Cetak 'K' di kanan jika exit di baris ini
-        if (exit.getCol() == cols && i == exit.getRow()) {
-            System.out.print(ANSI_GREEN + "K" + ANSI_RESET + " ");
-        }
-        System.out.println();
-    }
 
-    // Cetak 'K' di bawah papan jika exit position di bawah
-    if (exit.getRow() == rows) {
-        for (int j = 0; j < exit.getCol(); j++) {
-            System.out.print("  ");
+        //  'K' di bawah papan jika exit position di bawah
+        if (exit.getRow() == rows) {
+            for (int j = 0; j < exit.getCol(); j++) {
+                System.out.print("  ");
+            }
+            System.out.println(ANSI_GREEN + "K" + ANSI_RESET + " ");
         }
-        System.out.println(ANSI_GREEN + "K" + ANSI_RESET + " ");
     }
-}
 
     protected void debugUnexplored(PriorityQueue<State> unexplored) {
         for (State s : unexplored) {

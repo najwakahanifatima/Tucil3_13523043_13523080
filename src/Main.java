@@ -1,5 +1,5 @@
 
-import algorithms.GreedyBFSSolver;
+import algorithms.AStarSolver;
 import java.util.List;
 import utils.RushHourGame;
 import utils.SaveLoad;
@@ -11,16 +11,18 @@ public class Main {
         String input = system.Load();
         RushHourGame game = new RushHourGame(input);
 
-        GreedyBFSSolver solver = new GreedyBFSSolver(game);
+        AStarSolver solver = new AStarSolver(game);
+        game.displayBoard();
         long startTime = System.currentTimeMillis();
         List<State> result = solver.solve();
         long endTime = System.currentTimeMillis();
-        solver.displaySolution(result);
+        int steps = solver.displaySolution(result); // display sama jumlah steps
 
         // output 
         if (result != null) {
-            System.out.println("Solution found in " + (endTime - startTime) + " ms");
+            System.out.println("Total steps : " + steps);
             System.out.println("Total nodes explored: " + solver.getNodeCount());
+            System.out.println("Solution found in " + (endTime - startTime) + " ms");
         } else {
             System.out.println("No solution found.");
         }
