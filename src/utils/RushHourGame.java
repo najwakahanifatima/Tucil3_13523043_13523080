@@ -308,7 +308,7 @@ public class RushHourGame {
                 }
             case 2:
                 {
-                    GreedyBFSSolver solver = new GreedyBFSSolver(this);
+                    GreedyBFSSolver solver = new GreedyBFSSolver(this, heuristic);
                     solution = solver.solve();
                     steps = solver.displaySolution(solution);
                     nodes = solver.getNodeCount();
@@ -316,7 +316,7 @@ public class RushHourGame {
                 }
             default:
                 {
-                    AStarSolver solver = new AStarSolver(this);
+                    AStarSolver solver = new AStarSolver(this, heuristic);
                     solution = solver.solve();
                     steps = solver.displaySolution(solution);
                     nodes = solver.getNodeCount();
