@@ -1,0 +1,8 @@
+6 6
+10
+A....B
+ACDD.B
+.CPP.BK
+EEEF..
+G.HF..
+G.HIII
