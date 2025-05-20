@@ -29,13 +29,12 @@ public class Main {
             }
 
             System.out.println("===== Choose heuristic =====");
-            System.out.println(" 1. Heuristic A");
-            System.out.println(" 2. Heuristic B");
-            System.out.println(" 3. Heuristic C");
+            System.out.println(" 1. Blocking Vehicles");
+            System.out.println(" 2. Manhattan Distance");
             System.out.print("Your choice (number): ");
             heuristic = scanner.nextInt();
             scanner.nextLine();
-            if (heuristic > 3 || heuristic < 1) {
+            if (heuristic > 2 || heuristic < 1) {
                 System.out.println();
                 continue;
             }

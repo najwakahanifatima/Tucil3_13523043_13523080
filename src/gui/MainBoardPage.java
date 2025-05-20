@@ -34,7 +34,7 @@ public class MainBoardPage {
     private BorderPane layout;
     private final Integer CELL_SIZE = 60;
     private final List<String> algorithms = Arrays.asList("Uniform Cost Search", "Greedy Best First Search", "A* Algorithm");
-    private final List<String> heuristics = Arrays.asList("Heuristic 1", "Heuristic 2", "Heuristic 3");
+    private final List<String> heuristics = Arrays.asList("Blocking Vehicles", "Manhattan Distance");
     private final List<Color> otherColors = Arrays.asList(
             Color.LIGHTBLUE, Color.ORANGE, Color.PURPLE, Color.DARKCYAN,
             Color.GOLD, Color.DARKMAGENTA, Color.DARKORANGE, Color.DEEPSKYBLUE,
