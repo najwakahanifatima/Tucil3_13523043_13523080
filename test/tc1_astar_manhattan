@@ -1,0 +1,294 @@
+Step 0 - Initial state
+A . . . . B 
+A C D D . B 
+. C P P . B K
+E E E F . . 
+G . H F . . 
+G . H I I I 
+
+------------------------
+Step 1
+Move: C moves up
+A C . . . B 
+A C D D . B 
+. . P P . B K
+E E E F . . 
+G . H F . . 
+G . H I I I 
+
+------------------------
+Step 2
+Move: P moves left
+A C . . . B 
+A C D D . B 
+. P P . . B K
+E E E F . . 
+G . H F . . 
+G . H I I I 
+
+------------------------
+Step 3
+Move: F moves up
+A C . . . B 
+A C D D . B 
+. P P F . B K
+E E E F . . 
+G . H . . . 
+G . H I I I 
+
+------------------------
+Step 4
+Move: B moves down
+A C . . . . 
+A C D D . . 
+. P P F . B K
+E E E F . B 
+G . H . . B 
+G . H I I I 
+
+------------------------
+Step 5
+Move: D moves right
+A C . . . . 
+A C . . D D 
+. P P F . B K
+E E E F . B 
+G . H . . B 
+G . H I I I 
+
+------------------------
+Step 6
+Move: F moves up
+A C . F . . 
+A C . F D D 
+. P P . . B K
+E E E . . B 
+G . H . . B 
+G . H I I I 
+
+------------------------
+Step 7
+Move: P moves right
+A C . F . . 
+A C . F D D 
+. . P P . B K
+E E E . . B 
+G . H . . B 
+G . H I I I 
+
+------------------------
+Step 8
+Move: E moves right
+A C . F . . 
+A C . F D D 
+. . P P . B K
+. . E E E B 
+G . H . . B 
+G . H I I I 
+
+------------------------
+Step 9
+Move: C moves down
+A . . F . . 
+A . . F D D 
+. . P P . B K
+. . E E E B 
+G C H . . B 
+G C H I I I 
+
+------------------------
+Step 10
+Move: P moves left
+A . . F . . 
+A . . F D D 
+. P P . . B K
+. . E E E B 
+G C H . . B 
+G C H I I I 
+
+------------------------
+Step 11
+Move: F moves down
+A . . . . . 
+A . . F D D 
+. P P F . B K
+. . E E E B 
+G C H . . B 
+G C H I I I 
+
+------------------------
+Step 12
+Move: E moves left
+A . . . . . 
+A . . F D D 
+. P P F . B K
+E E E . . B 
+G C H . . B 
+G C H I I I 
+
+------------------------
+Step 13
+Move: F moves down
+A . . . . . 
+A . . . D D 
+. P P F . B K
+E E E F . B 
+G C H . . B 
+G C H I I I 
+
+------------------------
+Step 14
+Move: D moves left
+A . . . . . 
+A D D . . . 
+. P P F . B K
+E E E F . B 
+G C H . . B 
+G C H I I I 
+
+------------------------
+Step 15
+Move: F moves up
+A . . F . . 
+A D D F . . 
+. P P . . B K
+E E E . . B 
+G C H . . B 
+G C H I I I 
+
+------------------------
+Step 16
+Move: P moves right
+A . . F . . 
+A D D F . . 
+. . . P P B K
+E E E . . B 
+G C H . . B 
+G C H I I I 
+
+------------------------
+Step 17
+Move: A moves down
+. . . F . . 
+A D D F . . 
+A . . P P B K
+E E E . . B 
+G C H . . B 
+G C H I I I 
+
+------------------------
+Step 18
+Move: B moves up
+. . . F . B 
+A D D F . B 
+A . . P P B K
+E E E . . . 
+G C H . . . 
+G C H I I I 
+
+------------------------
+Step 19
+Move: E moves right
+. . . F . B 
+A D D F . B 
+A . . P P B K
+. E E E . . 
+G C H . . . 
+G C H I I I 
+
+------------------------
+Step 20
+Move: A moves down
+. . . F . B 
+. D D F . B 
+A . . P P B K
+A E E E . . 
+G C H . . . 
+G C H I I I 
+
+------------------------
+Step 21
+Move: E moves right
+. . . F . B 
+. D D F . B 
+A . . P P B K
+A . . E E E 
+G C H . . . 
+G C H I I I 
+
+------------------------
+Step 22
+Move: H moves up
+. . . F . B 
+. D D F . B 
+A . . P P B K
+A . H E E E 
+G C H . . . 
+G C . I I I 
+
+------------------------
+Step 23
+Move: D moves left
+. . . F . B 
+D D . F . B 
+A . . P P B K
+A . H E E E 
+G C H . . . 
+G C . I I I 
+
+------------------------
+Step 24
+Move: H moves up
+. . . F . B 
+D D H F . B 
+A . H P P B K
+A . . E E E 
+G C . . . . 
+G C . I I I 
+
+------------------------
+Step 25
+Move: E moves left
+. . . F . B 
+D D H F . B 
+A . H P P B K
+A . E E E . 
+G C . . . . 
+G C . I I I 
+
+------------------------
+Step 26
+Move: I moves left
+. . . F . B 
+D D H F . B 
+A . H P P B K
+A . E E E . 
+G C . . . . 
+G C I I I . 
+
+------------------------
+Step 27
+Move: B moves down
+. . . F . . 
+D D H F . . 
+A . H P P . K
+A . E E E B 
+G C . . . B 
+G C I I I B 
+
+------------------------
+Step 28
+Move: P moves right
+. . . F . . 
+D D H F . . 
+A . H . P P K
+A . E E E B 
+G C . . . B 
+G C I I I B 
+
+------------------------
+
+Summary:
+Total steps: 28
+Total nodes explored: 1205
+Solution found in 119 ms
