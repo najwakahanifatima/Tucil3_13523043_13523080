@@ -37,7 +37,7 @@ This program is an automated solver for the classic Rush Hour puzzle game, where
 
 ```
 ## Algorithms
-This section explains the algorithm used in this program, including Uniform Cost Search, Greedy Best First Search, A*, and Beam Search in a brief. Please refer to our [full report](./doc/) for more complete explaination and analysis.
+This section explains the algorithm used in this program, including Uniform Cost Search, Greedy Best First Search, A*, and Beam Search in a brief. Please refer to our [full report](./doc/) for more complete explanation and analysis.
 
 ### Uniform Cost Search
 The solver implements UCS algorithm using a priority queue to explore possible game states based on their estimated cost to reach the solution. Starting from the initial board configuration, it repeatedly selects the state with the lowest cost, checks if it is the goal, and if not, generates all valid neighboring states by moving vehicles. It keeps track of explored states to avoid revisiting them, ensuring efficiency. This process continues until the goal state—where the red car can exit—is found, or all possibilities are exhausted. The algorithm then reconstructs the sequence of moves leading to the solution, providing an optimal or near-optimal path to solve the puzzle.
