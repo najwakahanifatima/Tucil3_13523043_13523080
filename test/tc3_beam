@@ -1,0 +1,1973 @@
+Step 0 - Initial state
+    K
+A . . . D . 
+A C C C D . 
+F F P . D B 
+. . P G G B 
+. . . I . E 
+H H H I . E 
+
+------------------------
+Step 1
+Move: B moves up
+    K
+A . . . D . 
+A C C C D B 
+F F P . D B 
+. . P G G . 
+. . . I . E 
+H H H I . E 
+
+------------------------
+Step 2
+Move: G moves right
+    K
+A . . . D . 
+A C C C D B 
+F F P . D B 
+. . P . G G 
+. . . I . E 
+H H H I . E 
+
+------------------------
+Step 3
+Move: I moves up
+    K
+A . . . D . 
+A C C C D B 
+F F P . D B 
+. . P I G G 
+. . . I . E 
+H H H . . E 
+
+------------------------
+Step 4
+Move: B moves up
+    K
+A . . . D B 
+A C C C D B 
+F F P . D . 
+. . P I G G 
+. . . I . E 
+H H H . . E 
+
+------------------------
+Step 5
+Move: I moves up
+    K
+A . . . D B 
+A C C C D B 
+F F P I D . 
+. . P I G G 
+. . . . . E 
+H H H . . E 
+
+------------------------
+Step 6
+Move: B moves down
+    K
+A . . . D . 
+A C C C D B 
+F F P I D B 
+. . P I G G 
+. . . . . E 
+H H H . . E 
+
+------------------------
+Step 7
+Move: H moves right
+    K
+A . . . D . 
+A C C C D B 
+F F P I D B 
+. . P I G G 
+. . . . . E 
+. . H H H E 
+
+------------------------
+Step 8
+Move: P moves down
+    K
+A . . . D . 
+A C C C D B 
+F F . I D B 
+. . P I G G 
+. . P . . E 
+. . H H H E 
+
+------------------------
+Step 9
+Move: F moves right
+    K
+A . . . D . 
+A C C C D B 
+. F F I D B 
+. . P I G G 
+. . P . . E 
+. . H H H E 
+
+------------------------
+Step 10
+Move: A moves down
+    K
+. . . . D . 
+. C C C D B 
+A F F I D B 
+A . P I G G 
+. . P . . E 
+. . H H H E 
+
+------------------------
+Step 11
+Move: C moves left
+    K
+. . . . D . 
+C C C . D B 
+A F F I D B 
+A . P I G G 
+. . P . . E 
+. . H H H E 
+
+------------------------
+Step 12
+Move: H moves left
+    K
+. . . . D . 
+C C C . D B 
+A F F I D B 
+A . P I G G 
+. . P . . E 
+. H H H . E 
+
+------------------------
+Step 13
+Move: I moves up
+    K
+. . . . D . 
+C C C I D B 
+A F F I D B 
+A . P . G G 
+. . P . . E 
+. H H H . E 
+
+------------------------
+Step 14
+Move: A moves down
+    K
+. . . . D . 
+C C C I D B 
+. F F I D B 
+A . P . G G 
+A . P . . E 
+. H H H . E 
+
+------------------------
+Step 15
+Move: F moves left
+    K
+. . . . D . 
+C C C I D B 
+F F . I D B 
+A . P . G G 
+A . P . . E 
+. H H H . E 
+
+------------------------
+Step 16
+Move: P moves up
+    K
+. . . . D . 
+C C C I D B 
+F F P I D B 
+A . P . G G 
+A . . . . E 
+. H H H . E 
+
+------------------------
+Step 17
+Move: B moves up
+    K
+. . . . D B 
+C C C I D B 
+F F P I D . 
+A . P . G G 
+A . . . . E 
+. H H H . E 
+
+------------------------
+Step 18
+Move: G moves left
+    K
+. . . . D B 
+C C C I D B 
+F F P I D . 
+A . P G G . 
+A . . . . E 
+. H H H . E 
+
+------------------------
+Step 19
+Move: H moves right
+    K
+. . . . D B 
+C C C I D B 
+F F P I D . 
+A . P G G . 
+A . . . . E 
+. . H H H E 
+
+------------------------
+Step 20
+Move: G moves right
+    K
+. . . . D B 
+C C C I D B 
+F F P I D . 
+A . P . G G 
+A . . . . E 
+. . H H H E 
+
+------------------------
+Step 21
+Move: I moves up
+    K
+. . . I D B 
+C C C I D B 
+F F P . D . 
+A . P . G G 
+A . . . . E 
+. . H H H E 
+
+------------------------
+Step 22
+Move: B moves down
+    K
+. . . I D . 
+C C C I D B 
+F F P . D B 
+A . P . G G 
+A . . . . E 
+. . H H H E 
+
+------------------------
+Step 23
+Move: G moves left
+    K
+. . . I D . 
+C C C I D B 
+F F P . D B 
+A . P G G . 
+A . . . . E 
+. . H H H E 
+
+------------------------
+Step 24
+Move: H moves left
+    K
+. . . I D . 
+C C C I D B 
+F F P . D B 
+A . P G G . 
+A . . . . E 
+. H H H . E 
+
+------------------------
+Step 25
+Move: E moves up
+    K
+. . . I D . 
+C C C I D B 
+F F P . D B 
+A . P G G E 
+A . . . . E 
+. H H H . . 
+
+------------------------
+Step 26
+Move: B moves up
+    K
+. . . I D B 
+C C C I D B 
+F F P . D . 
+A . P G G E 
+A . . . . E 
+. H H H . . 
+
+------------------------
+Step 27
+Move: H moves right
+    K
+. . . I D B 
+C C C I D B 
+F F P . D . 
+A . P G G E 
+A . . . . E 
+. . H H H . 
+
+------------------------
+Step 28
+Move: B moves down
+    K
+. . . I D . 
+C C C I D B 
+F F P . D B 
+A . P G G E 
+A . . . . E 
+. . H H H . 
+
+------------------------
+Step 29
+Move: A moves down
+    K
+. . . I D . 
+C C C I D B 
+F F P . D B 
+. . P G G E 
+A . . . . E 
+A . H H H . 
+
+------------------------
+Step 30
+Move: H moves left
+    K
+. . . I D . 
+C C C I D B 
+F F P . D B 
+. . P G G E 
+A . . . . E 
+A H H H . . 
+
+------------------------
+Step 31
+Move: E moves down
+    K
+. . . I D . 
+C C C I D B 
+F F P . D B 
+. . P G G . 
+A . . . . E 
+A H H H . E 
+
+------------------------
+Step 32
+Move: H moves right
+    K
+. . . I D . 
+C C C I D B 
+F F P . D B 
+. . P G G . 
+A . . . . E 
+A . H H H E 
+
+------------------------
+Step 33
+Move: B moves down
+    K
+. . . I D . 
+C C C I D . 
+F F P . D B 
+. . P G G B 
+A . . . . E 
+A . H H H E 
+
+------------------------
+Step 34
+Move: A moves up
+    K
+. . . I D . 
+C C C I D . 
+F F P . D B 
+A . P G G B 
+A . . . . E 
+. . H H H E 
+
+------------------------
+Step 35
+Move: P moves down
+    K
+. . . I D . 
+C C C I D . 
+F F . . D B 
+A . P G G B 
+A . P . . E 
+. . H H H E 
+
+------------------------
+Step 36
+Move: B moves up
+    K
+. . . I D B 
+C C C I D B 
+F F . . D . 
+A . P G G . 
+A . P . . E 
+. . H H H E 
+
+------------------------
+Step 37
+Move: E moves up
+    K
+. . . I D B 
+C C C I D B 
+F F . . D . 
+A . P G G E 
+A . P . . E 
+. . H H H . 
+
+------------------------
+Step 38
+Move: F moves right
+    K
+. . . I D B 
+C C C I D B 
+. . F F D . 
+A . P G G E 
+A . P . . E 
+. . H H H . 
+
+------------------------
+Step 39
+Move: A moves down
+    K
+. . . I D B 
+C C C I D B 
+. . F F D . 
+. . P G G E 
+A . P . . E 
+A . H H H . 
+
+------------------------
+Step 40
+Move: E moves up
+    K
+. . . I D B 
+C C C I D B 
+. . F F D E 
+. . P G G E 
+A . P . . . 
+A . H H H . 
+
+------------------------
+Step 41
+Move: F moves left
+    K
+. . . I D B 
+C C C I D B 
+. F F . D E 
+. . P G G E 
+A . P . . . 
+A . H H H . 
+
+------------------------
+Step 42
+Move: A moves up
+    K
+. . . I D B 
+C C C I D B 
+A F F . D E 
+A . P G G E 
+. . P . . . 
+. . H H H . 
+
+------------------------
+Step 43
+Move: H moves left
+    K
+. . . I D B 
+C C C I D B 
+A F F . D E 
+A . P G G E 
+. . P . . . 
+. H H H . . 
+
+------------------------
+Step 44
+Move: E moves down
+    K
+. . . I D B 
+C C C I D B 
+A F F . D . 
+A . P G G E 
+. . P . . E 
+. H H H . . 
+
+------------------------
+Step 45
+Move: A moves down
+    K
+. . . I D B 
+C C C I D B 
+. F F . D . 
+A . P G G E 
+A . P . . E 
+. H H H . . 
+
+------------------------
+Step 46
+Move: E moves down
+    K
+. . . I D B 
+C C C I D B 
+. F F . D . 
+A . P G G . 
+A . P . . E 
+. H H H . E 
+
+------------------------
+Step 47
+Move: A moves up
+    K
+. . . I D B 
+C C C I D B 
+A F F . D . 
+A . P G G . 
+. . P . . E 
+. H H H . E 
+
+------------------------
+Step 48
+Move: G moves right
+    K
+. . . I D B 
+C C C I D B 
+A F F . D . 
+A . P . G G 
+. . P . . E 
+. H H H . E 
+
+------------------------
+Step 49
+Move: F moves right
+    K
+. . . I D B 
+C C C I D B 
+A . F F D . 
+A . P . G G 
+. . P . . E 
+. H H H . E 
+
+------------------------
+Step 50
+Move: A moves down
+    K
+. . . I D B 
+C C C I D B 
+. . F F D . 
+A . P . G G 
+A . P . . E 
+. H H H . E 
+
+------------------------
+Step 51
+Move: B moves down
+    K
+. . . I D . 
+C C C I D B 
+. . F F D B 
+A . P . G G 
+A . P . . E 
+. H H H . E 
+
+------------------------
+Step 52
+Move: G moves left
+    K
+. . . I D . 
+C C C I D B 
+. . F F D B 
+A . P G G . 
+A . P . . E 
+. H H H . E 
+
+------------------------
+Step 53
+Move: E moves up
+    K
+. . . I D . 
+C C C I D B 
+. . F F D B 
+A . P G G E 
+A . P . . E 
+. H H H . . 
+
+------------------------
+Step 54
+Move: H moves left
+    K
+. . . I D . 
+C C C I D B 
+. . F F D B 
+A . P G G E 
+A . P . . E 
+H H H . . . 
+
+------------------------
+Step 55
+Move: E moves down
+    K
+. . . I D . 
+C C C I D B 
+. . F F D B 
+A . P G G . 
+A . P . . E 
+H H H . . E 
+
+------------------------
+Step 56
+Move: F moves left
+    K
+. . . I D . 
+C C C I D B 
+F F . . D B 
+A . P G G . 
+A . P . . E 
+H H H . . E 
+
+------------------------
+Step 57
+Move: B moves up
+    K
+. . . I D B 
+C C C I D B 
+F F . . D . 
+A . P G G . 
+A . P . . E 
+H H H . . E 
+
+------------------------
+Step 58
+Move: G moves right
+    K
+. . . I D B 
+C C C I D B 
+F F . . D . 
+A . P . G G 
+A . P . . E 
+H H H . . E 
+
+------------------------
+Step 59
+Move: B moves down
+    K
+. . . I D . 
+C C C I D B 
+F F . . D B 
+A . P . G G 
+A . P . . E 
+H H H . . E 
+
+------------------------
+Step 60
+Move: I moves down
+    K
+. . . . D . 
+C C C I D B 
+F F . I D B 
+A . P . G G 
+A . P . . E 
+H H H . . E 
+
+------------------------
+Step 61
+Move: B moves up
+    K
+. . . . D B 
+C C C I D B 
+F F . I D . 
+A . P . G G 
+A . P . . E 
+H H H . . E 
+
+------------------------
+Step 62
+Move: H moves right
+    K
+. . . . D B 
+C C C I D B 
+F F . I D . 
+A . P . G G 
+A . P . . E 
+. H H H . E 
+
+------------------------
+Step 63
+Move: A moves down
+    K
+. . . . D B 
+C C C I D B 
+F F . I D . 
+. . P . G G 
+A . P . . E 
+A H H H . E 
+
+------------------------
+Step 64
+Move: I moves down
+    K
+. . . . D B 
+C C C . D B 
+F F . I D . 
+. . P I G G 
+A . P . . E 
+A H H H . E 
+
+------------------------
+Step 65
+Move: P moves up
+    K
+. . . . D B 
+C C C . D B 
+F F P I D . 
+. . P I G G 
+A . . . . E 
+A H H H . E 
+
+------------------------
+Step 66
+Move: I moves down
+    K
+. . . . D B 
+C C C . D B 
+F F P . D . 
+. . P I G G 
+A . . I . E 
+A H H H . E 
+
+------------------------
+Step 67
+Move: A moves up
+    K
+. . . . D B 
+C C C . D B 
+F F P . D . 
+A . P I G G 
+A . . I . E 
+. H H H . E 
+
+------------------------
+Step 68
+Move: H moves left
+    K
+. . . . D B 
+C C C . D B 
+F F P . D . 
+A . P I G G 
+A . . I . E 
+H H H . . E 
+
+------------------------
+Step 69
+Move: C moves right
+    K
+. . . . D B 
+. C C C D B 
+F F P . D . 
+A . P I G G 
+A . . I . E 
+H H H . . E 
+
+------------------------
+Step 70
+Move: I moves down
+    K
+. . . . D B 
+. C C C D B 
+F F P . D . 
+A . P . G G 
+A . . I . E 
+H H H I . E 
+
+------------------------
+Step 71
+Move: B moves down
+    K
+. . . . D . 
+. C C C D B 
+F F P . D B 
+A . P . G G 
+A . . I . E 
+H H H I . E 
+
+------------------------
+Step 72
+Move: C moves left
+    K
+. . . . D . 
+C C C . D B 
+F F P . D B 
+A . P . G G 
+A . . I . E 
+H H H I . E 
+
+------------------------
+Step 73
+Move: G moves left
+    K
+. . . . D . 
+C C C . D B 
+F F P . D B 
+A . P G G . 
+A . . I . E 
+H H H I . E 
+
+------------------------
+Step 74
+Move: P moves down
+    K
+. . . . D . 
+C C C . D B 
+F F . . D B 
+A . P G G . 
+A . P I . E 
+H H H I . E 
+
+------------------------
+Step 75
+Move: G moves right
+    K
+. . . . D . 
+C C C . D B 
+F F . . D B 
+A . P . G G 
+A . P I . E 
+H H H I . E 
+
+------------------------
+Step 76
+Move: B moves up
+    K
+. . . . D B 
+C C C . D B 
+F F . . D . 
+A . P . G G 
+A . P I . E 
+H H H I . E 
+
+------------------------
+Step 77
+Move: F moves right
+    K
+. . . . D B 
+C C C . D B 
+. . F F D . 
+A . P . G G 
+A . P I . E 
+H H H I . E 
+
+------------------------
+Step 78
+Move: B moves down
+    K
+. . . . D . 
+C C C . D B 
+. . F F D B 
+A . P . G G 
+A . P I . E 
+H H H I . E 
+
+------------------------
+Step 79
+Move: G moves left
+    K
+. . . . D . 
+C C C . D B 
+. . F F D B 
+A . P G G . 
+A . P I . E 
+H H H I . E 
+
+------------------------
+Step 80
+Move: C moves right
+    K
+. . . . D . 
+. C C C D B 
+. . F F D B 
+A . P G G . 
+A . P I . E 
+H H H I . E 
+
+------------------------
+Step 81
+Move: B moves up
+    K
+. . . . D B 
+. C C C D B 
+. . F F D . 
+A . P G G . 
+A . P I . E 
+H H H I . E 
+
+------------------------
+Step 82
+Move: F moves left
+    K
+. . . . D B 
+. C C C D B 
+. F F . D . 
+A . P G G . 
+A . P I . E 
+H H H I . E 
+
+------------------------
+Step 83
+Move: A moves up
+    K
+. . . . D B 
+. C C C D B 
+A F F . D . 
+A . P G G . 
+. . P I . E 
+H H H I . E 
+
+------------------------
+Step 84
+Move: G moves right
+    K
+. . . . D B 
+. C C C D B 
+A F F . D . 
+A . P . G G 
+. . P I . E 
+H H H I . E 
+
+------------------------
+Step 85
+Move: A moves up
+    K
+. . . . D B 
+A C C C D B 
+A F F . D . 
+. . P . G G 
+. . P I . E 
+H H H I . E 
+
+------------------------
+Step 86
+Move: B moves down
+    K
+. . . . D . 
+A C C C D B 
+A F F . D B 
+. . P . G G 
+. . P I . E 
+H H H I . E 
+
+------------------------
+Step 87
+Move: I moves up
+    K
+. . . . D . 
+A C C C D B 
+A F F . D B 
+. . P I G G 
+. . P I . E 
+H H H . . E 
+
+------------------------
+Step 88
+Move: A moves down
+    K
+. . . . D . 
+. C C C D B 
+A F F . D B 
+A . P I G G 
+. . P I . E 
+H H H . . E 
+
+------------------------
+Step 89
+Move: H moves right
+    K
+. . . . D . 
+. C C C D B 
+A F F . D B 
+A . P I G G 
+. . P I . E 
+. H H H . E 
+
+------------------------
+Step 90
+Move: C moves left
+    K
+. . . . D . 
+C C C . D B 
+A F F . D B 
+A . P I G G 
+. . P I . E 
+. H H H . E 
+
+------------------------
+Step 91
+Move: A moves down
+    K
+. . . . D . 
+C C C . D B 
+. F F . D B 
+A . P I G G 
+A . P I . E 
+. H H H . E 
+
+------------------------
+Step 92
+Move: F moves right
+    K
+. . . . D . 
+C C C . D B 
+. . F F D B 
+A . P I G G 
+A . P I . E 
+. H H H . E 
+
+------------------------
+Step 93
+Move: C moves right
+    K
+. . . . D . 
+. C C C D B 
+. . F F D B 
+A . P I G G 
+A . P I . E 
+. H H H . E 
+
+------------------------
+Step 94
+Move: A moves down
+    K
+. . . . D . 
+. C C C D B 
+. . F F D B 
+. . P I G G 
+A . P I . E 
+A H H H . E 
+
+------------------------
+Step 95
+Move: F moves left
+    K
+. . . . D . 
+. C C C D B 
+. F F . D B 
+. . P I G G 
+A . P I . E 
+A H H H . E 
+
+------------------------
+Step 96
+Move: H moves right
+    K
+. . . . D . 
+. C C C D B 
+. F F . D B 
+. . P I G G 
+A . P I . E 
+A . H H H E 
+
+------------------------
+Step 97
+Move: F moves left
+    K
+. . . . D . 
+. C C C D B 
+F F . . D B 
+. . P I G G 
+A . P I . E 
+A . H H H E 
+
+------------------------
+Step 98
+Move: B moves up
+    K
+. . . . D B 
+. C C C D B 
+F F . . D . 
+. . P I G G 
+A . P I . E 
+A . H H H E 
+
+------------------------
+Step 99
+Move: F moves right
+    K
+. . . . D B 
+. C C C D B 
+. F F . D . 
+. . P I G G 
+A . P I . E 
+A . H H H E 
+
+------------------------
+Step 100
+Move: C moves left
+    K
+. . . . D B 
+C C C . D B 
+. F F . D . 
+. . P I G G 
+A . P I . E 
+A . H H H E 
+
+------------------------
+Step 101
+Move: I moves up
+    K
+. . . . D B 
+C C C I D B 
+. F F I D . 
+. . P . G G 
+A . P . . E 
+A . H H H E 
+
+------------------------
+Step 102
+Move: H moves left
+    K
+. . . . D B 
+C C C I D B 
+. F F I D . 
+. . P . G G 
+A . P . . E 
+A H H H . E 
+
+------------------------
+Step 103
+Move: G moves left
+    K
+. . . . D B 
+C C C I D B 
+. F F I D . 
+. . P G G . 
+A . P . . E 
+A H H H . E 
+
+------------------------
+Step 104
+Move: A moves up
+    K
+. . . . D B 
+C C C I D B 
+A F F I D . 
+A . P G G . 
+. . P . . E 
+. H H H . E 
+
+------------------------
+Step 105
+Move: B moves down
+    K
+. . . . D . 
+C C C I D B 
+A F F I D B 
+A . P G G . 
+. . P . . E 
+. H H H . E 
+
+------------------------
+Step 106
+Move: E moves up
+    K
+. . . . D . 
+C C C I D B 
+A F F I D B 
+A . P G G E 
+. . P . . E 
+. H H H . . 
+
+------------------------
+Step 107
+Move: B moves up
+    K
+. . . . D B 
+C C C I D B 
+A F F I D . 
+A . P G G E 
+. . P . . E 
+. H H H . . 
+
+------------------------
+Step 108
+Move: A moves down
+    K
+. . . . D B 
+C C C I D B 
+. F F I D . 
+. . P G G E 
+A . P . . E 
+A H H H . . 
+
+------------------------
+Step 109
+Move: B moves down
+    K
+. . . . D . 
+C C C I D B 
+. F F I D B 
+. . P G G E 
+A . P . . E 
+A H H H . . 
+
+------------------------
+Step 110
+Move: H moves right
+    K
+. . . . D . 
+C C C I D B 
+. F F I D B 
+. . P G G E 
+A . P . . E 
+A . H H H . 
+
+------------------------
+Step 111
+Move: A moves up
+    K
+. . . . D . 
+C C C I D B 
+. F F I D B 
+A . P G G E 
+A . P . . E 
+. . H H H . 
+
+------------------------
+Step 112
+Move: F moves left
+    K
+. . . . D . 
+C C C I D B 
+F F . I D B 
+A . P G G E 
+A . P . . E 
+. . H H H . 
+
+------------------------
+Step 113
+Move: A moves down
+    K
+. . . . D . 
+C C C I D B 
+F F . I D B 
+. . P G G E 
+A . P . . E 
+A . H H H . 
+
+------------------------
+Step 114
+Move: H moves right
+    K
+. . . . D . 
+C C C I D B 
+F F . I D B 
+. . P G G E 
+A . P . . E 
+A . . H H H 
+
+------------------------
+Step 115
+Move: I moves up
+    K
+. . . I D . 
+C C C I D B 
+F F . . D B 
+. . P G G E 
+A . P . . E 
+A . . H H H 
+
+------------------------
+Step 116
+Move: B moves up
+    K
+. . . I D B 
+C C C I D B 
+F F . . D . 
+. . P G G E 
+A . P . . E 
+A . . H H H 
+
+------------------------
+Step 117
+Move: I moves down
+    K
+. . . . D B 
+C C C I D B 
+F F . I D . 
+. . P G G E 
+A . P . . E 
+A . . H H H 
+
+------------------------
+Step 118
+Move: F moves right
+    K
+. . . . D B 
+C C C I D B 
+. F F I D . 
+. . P G G E 
+A . P . . E 
+A . . H H H 
+
+------------------------
+Step 119
+Move: A moves up
+    K
+. . . . D B 
+C C C I D B 
+. F F I D . 
+A . P G G E 
+A . P . . E 
+. . . H H H 
+
+------------------------
+Step 120
+Move: B moves down
+    K
+. . . . D . 
+C C C I D B 
+. F F I D B 
+A . P G G E 
+A . P . . E 
+. . . H H H 
+
+------------------------
+Step 121
+Move: A moves up
+    K
+. . . . D . 
+C C C I D B 
+A F F I D B 
+A . P G G E 
+. . P . . E 
+. . . H H H 
+
+------------------------
+Step 122
+Move: B moves up
+    K
+. . . . D B 
+C C C I D B 
+A F F I D . 
+A . P G G E 
+. . P . . E 
+. . . H H H 
+
+------------------------
+Step 123
+Move: P moves down
+    K
+. . . . D B 
+C C C I D B 
+A F F I D . 
+A . . G G E 
+. . P . . E 
+. . P H H H 
+
+------------------------
+Step 124
+Move: I moves up
+    K
+. . . I D B 
+C C C I D B 
+A F F . D . 
+A . . G G E 
+. . P . . E 
+. . P H H H 
+
+------------------------
+Step 125
+Move: A moves down
+    K
+. . . I D B 
+C C C I D B 
+. F F . D . 
+A . . G G E 
+A . P . . E 
+. . P H H H 
+
+------------------------
+Step 126
+Move: B moves down
+    K
+. . . I D . 
+C C C I D B 
+. F F . D B 
+A . . G G E 
+A . P . . E 
+. . P H H H 
+
+------------------------
+Step 127
+Move: A moves up
+    K
+. . . I D . 
+C C C I D B 
+A F F . D B 
+A . . G G E 
+. . P . . E 
+. . P H H H 
+
+------------------------
+Step 128
+Move: G moves left
+    K
+. . . I D . 
+C C C I D B 
+A F F . D B 
+A . G G . E 
+. . P . . E 
+. . P H H H 
+
+------------------------
+Step 129
+Move: B moves up
+    K
+. . . I D B 
+C C C I D B 
+A F F . D . 
+A . G G . E 
+. . P . . E 
+. . P H H H 
+
+------------------------
+Step 130
+Move: A moves down
+    K
+. . . I D B 
+C C C I D B 
+. F F . D . 
+A . G G . E 
+A . P . . E 
+. . P H H H 
+
+------------------------
+Step 131
+Move: D moves down
+    K
+. . . I . B 
+C C C I D B 
+. F F . D . 
+A . G G D E 
+A . P . . E 
+. . P H H H 
+
+------------------------
+Step 132
+Move: B moves down
+    K
+. . . I . . 
+C C C I D B 
+. F F . D B 
+A . G G D E 
+A . P . . E 
+. . P H H H 
+
+------------------------
+Step 133
+Move: G moves left
+    K
+. . . I . . 
+C C C I D B 
+. F F . D B 
+A G G . D E 
+A . P . . E 
+. . P H H H 
+
+------------------------
+Step 134
+Move: F moves left
+    K
+. . . I . . 
+C C C I D B 
+F F . . D B 
+A G G . D E 
+A . P . . E 
+. . P H H H 
+
+------------------------
+Step 135
+Move: A moves down
+    K
+. . . I . . 
+C C C I D B 
+F F . . D B 
+. G G . D E 
+A . P . . E 
+A . P H H H 
+
+------------------------
+Step 136
+Move: D moves down
+    K
+. . . I . . 
+C C C I . B 
+F F . . D B 
+. G G . D E 
+A . P . D E 
+A . P H H H 
+
+------------------------
+Step 137
+Move: G moves left
+    K
+. . . I . . 
+C C C I . B 
+F F . . D B 
+G G . . D E 
+A . P . D E 
+A . P H H H 
+
+------------------------
+Step 138
+Move: P moves up
+    K
+. . . I . . 
+C C C I . B 
+F F P . D B 
+G G P . D E 
+A . . . D E 
+A . . H H H 
+
+------------------------
+Step 139
+Move: I moves down
+    K
+. . . . . . 
+C C C I . B 
+F F P I D B 
+G G P . D E 
+A . . . D E 
+A . . H H H 
+
+------------------------
+Step 140
+Move: B moves up
+    K
+. . . . . B 
+C C C I . B 
+F F P I D . 
+G G P . D E 
+A . . . D E 
+A . . H H H 
+
+------------------------
+Step 141
+Move: D moves up
+    K
+. . . . . B 
+C C C I D B 
+F F P I D . 
+G G P . D E 
+A . . . . E 
+A . . H H H 
+
+------------------------
+Step 142
+Move: H moves left
+    K
+. . . . . B 
+C C C I D B 
+F F P I D . 
+G G P . D E 
+A . . . . E 
+A . H H H . 
+
+------------------------
+Step 143
+Move: I moves down
+    K
+. . . . . B 
+C C C . D B 
+F F P I D . 
+G G P I D E 
+A . . . . E 
+A . H H H . 
+
+------------------------
+Step 144
+Move: D moves down
+    K
+. . . . . B 
+C C C . . B 
+F F P I D . 
+G G P I D E 
+A . . . D E 
+A . H H H . 
+
+------------------------
+Step 145
+Move: E moves down
+    K
+. . . . . B 
+C C C . . B 
+F F P I D . 
+G G P I D . 
+A . . . D E 
+A . H H H E 
+
+------------------------
+Step 146
+Move: H moves left
+    K
+. . . . . B 
+C C C . . B 
+F F P I D . 
+G G P I D . 
+A . . . D E 
+A H H H . E 
+
+------------------------
+Step 147
+Move: I moves up
+    K
+. . . . . B 
+C C C I . B 
+F F P I D . 
+G G P . D . 
+A . . . D E 
+A H H H . E 
+
+------------------------
+Step 148
+Move: E moves up
+    K
+. . . . . B 
+C C C I . B 
+F F P I D . 
+G G P . D E 
+A . . . D E 
+A H H H . . 
+
+------------------------
+Step 149
+Move: D moves down
+    K
+. . . . . B 
+C C C I . B 
+F F P I . . 
+G G P . D E 
+A . . . D E 
+A H H H D . 
+
+------------------------
+Step 150
+Move: I moves down
+    K
+. . . . . B 
+C C C . . B 
+F F P I . . 
+G G P I D E 
+A . . . D E 
+A H H H D . 
+
+------------------------
+Step 151
+Move: D moves up
+    K
+. . . . . B 
+C C C . . B 
+F F P I D . 
+G G P I D E 
+A . . . D E 
+A H H H . . 
+
+------------------------
+Step 152
+Move: C moves right
+    K
+. . . . . B 
+. C C C . B 
+F F P I D . 
+G G P I D E 
+A . . . D E 
+A H H H . . 
+
+------------------------
+Step 153
+Move: D moves up
+    K
+. . . . . B 
+. C C C D B 
+F F P I D . 
+G G P I D E 
+A . . . . E 
+A H H H . . 
+
+------------------------
+Step 154
+Move: C moves left
+    K
+. . . . . B 
+C C C . D B 
+F F P I D . 
+G G P I D E 
+A . . . . E 
+A H H H . . 
+
+------------------------
+Step 155
+Move: E moves up
+    K
+. . . . . B 
+C C C . D B 
+F F P I D E 
+G G P I D E 
+A . . . . . 
+A H H H . . 
+
+------------------------
+Step 156
+Move: I moves down
+    K
+. . . . . B 
+C C C . D B 
+F F P . D E 
+G G P I D E 
+A . . I . . 
+A H H H . . 
+
+------------------------
+Step 157
+Move: D moves down
+    K
+. . . . . B 
+C C C . . B 
+F F P . D E 
+G G P I D E 
+A . . I D . 
+A H H H . . 
+
+------------------------
+Step 158
+Move: E moves down
+    K
+. . . . . B 
+C C C . . B 
+F F P . D . 
+G G P I D . 
+A . . I D E 
+A H H H . E 
+
+------------------------
+Step 159
+Move: C moves right
+    K
+. . . . . B 
+. C C C . B 
+F F P . D . 
+G G P I D . 
+A . . I D E 
+A H H H . E 
+
+------------------------
+Step 160
+Move: E moves up
+    K
+. . . . . B 
+. C C C . B 
+F F P . D E 
+G G P I D E 
+A . . I D . 
+A H H H . . 
+
+------------------------
+Step 161
+Move: D moves up
+    K
+. . . . . B 
+. C C C D B 
+F F P . D E 
+G G P I D E 
+A . . I . . 
+A H H H . . 
+
+------------------------
+Step 162
+Move: H moves right
+    K
+. . . . . B 
+. C C C D B 
+F F P . D E 
+G G P I D E 
+A . . I . . 
+A . H H H . 
+
+------------------------
+Step 163
+Move: D moves down
+    K
+. . . . . B 
+. C C C . B 
+F F P . D E 
+G G P I D E 
+A . . I D . 
+A . H H H . 
+
+------------------------
+Step 164
+Move: I moves up
+    K
+. . . . . B 
+. C C C . B 
+F F P I D E 
+G G P I D E 
+A . . . D . 
+A . H H H . 
+
+------------------------
+Step 165
+Move: H moves right
+    K
+. . . . . B 
+. C C C . B 
+F F P I D E 
+G G P I D E 
+A . . . D . 
+A . . H H H 
+
+------------------------
+Step 166
+Move: I moves down
+    K
+. . . . . B 
+. C C C . B 
+F F P . D E 
+G G P I D E 
+A . . I D . 
+A . . H H H 
+
+------------------------
+Step 167
+Move: C moves right
+    K
+. . . . . B 
+. . C C C B 
+F F P . D E 
+G G P I D E 
+A . . I D . 
+A . . H H H 
+
+------------------------
+Step 168
+Move: E moves down
+    K
+. . . . . B 
+. . C C C B 
+F F P . D . 
+G G P I D E 
+A . . I D E 
+A . . H H H 
+
+------------------------
+Step 169
+Move: C moves left
+    K
+. . . . . B 
+C C C . . B 
+F F P . D . 
+G G P I D E 
+A . . I D E 
+A . . H H H 
+
+------------------------
+Step 170
+Move: I moves up
+    K
+. . . . . B 
+C C C . . B 
+F F P I D . 
+G G P I D E 
+A . . . D E 
+A . . H H H 
+
+------------------------
+Step 171
+Move: B moves down
+    K
+. . . . . . 
+C C C . . B 
+F F P I D B 
+G G P I D E 
+A . . . D E 
+A . . H H H 
+
+------------------------
+Step 172
+Move: H moves left
+    K
+. . . . . . 
+C C C . . B 
+F F P I D B 
+G G P I D E 
+A . . . D E 
+A . H H H . 
+
+------------------------
+Step 173
+Move: C moves right
+    K
+. . . . . . 
+. C C C . B 
+F F P I D B 
+G G P I D E 
+A . . . D E 
+A . H H H . 
+
+------------------------
+Step 174
+Move: E moves down
+    K
+. . . . . . 
+. C C C . B 
+F F P I D B 
+G G P I D . 
+A . . . D E 
+A . H H H E 
+
+------------------------
+Step 175
+Move: C moves right
+    K
+. . . . . . 
+. . C C C B 
+F F P I D B 
+G G P I D . 
+A . . . D E 
+A . H H H E 
+
+------------------------
+Step 176
+Move: B moves down
+    K
+. . . . . . 
+. . C C C . 
+F F P I D B 
+G G P I D B 
+A . . . D E 
+A . H H H E 
+
+------------------------
+Step 177
+Move: C moves right
+    K
+. . . . . . 
+. . . C C C 
+F F P I D B 
+G G P I D B 
+A . . . D E 
+A . H H H E 
+
+------------------------
+Step 178
+Move: P moves up
+    K
+. . P . . . 
+. . P C C C 
+F F . I D B 
+G G . I D B 
+A . . . D E 
+A . H H H E 
+
+------------------------
+
+Summary:
+Total steps: 178
+Total nodes explored: 1124
+Solution found in 387 ms

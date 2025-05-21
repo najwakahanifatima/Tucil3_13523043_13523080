@@ -1,5 +1,5 @@
 # Rush Hour Game Solver 🚗⌚
-![image](https://github.com/user-attachments/assets/eea3b520-bdc6-43a5-8892-c2cea1771383)
+![image](https://github.com/user-attachments/assets/6467464d-d989-441f-a940-a19d42566c2f)
 
 ## Overview
 This program is an automated solver for the classic Rush Hour puzzle game, where the goal is to move the red car out of a congested (commonly) 6x6 grid by sliding other vehicles out of its way. This solver uses a pathfinding algorithm to efficiently find a sequence of moves that leads the red car to the exit. Specifically, it treats each game state as a state and explores possible moves using uninformed and informed search strategies. 
@@ -37,7 +37,7 @@ This program is an automated solver for the classic Rush Hour puzzle game, where
 
 ```
 ## Algorithms
-This section explains the algorithm used in this program, including Uniform Cost Search, Greedy Best First Search, A*, and Beam Search in a brief. Please refer to our [full report](./doc/) for more complete explaination and analysis.
+This section explains the algorithm used in this program, including Uniform Cost Search, Greedy Best First Search, A*, and Beam Search in a brief. Please refer to our [full report](./doc/) for more complete explanation and analysis.
 
 ### Uniform Cost Search
 The solver implements UCS algorithm using a priority queue to explore possible game states based on their estimated cost to reach the solution. Starting from the initial board configuration, it repeatedly selects the state with the lowest cost, checks if it is the goal, and if not, generates all valid neighboring states by moving vehicles. It keeps track of explored states to avoid revisiting them, ensuring efficiency. This process continues until the goal state—where the red car can exit—is found, or all possibilities are exhausted. The algorithm then reconstructs the sequence of moves leading to the solution, providing an optimal or near-optimal path to solve the puzzle.
